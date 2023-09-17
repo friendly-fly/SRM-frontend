@@ -5,13 +5,11 @@ import Footer from './Footer'
 const Layout = ({ children, childrenHeight }) => {
     return (
         <>
-            <div className="container-fluid">
-                <Header />
-                <div style={{ height: childrenHeight }}>
-                    {children}
-                </div>
-                <Footer />
+            <Header />
+            <div style={{ height: childrenHeight }}>
+                {children}
             </div>
+            <Footer />
         </>
     )
 }
