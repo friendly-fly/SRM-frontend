@@ -49,6 +49,7 @@ body {
 }
 
 .footer {
+    height: 8vh;
     background-color: var(--four);
     font-weight: 600;
 }
