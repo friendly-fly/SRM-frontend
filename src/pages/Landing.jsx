@@ -1,33 +1,21 @@
 import React from 'react'
 import heroBanner from "../assets/hero.svg"
 import { Link } from 'react-router-dom'
+import Footer from '../components/Layout/Footer'
+import Header from '../components/Layout/Header'
+import Layout from '../components/Layout/Layout'
 
 const Landing = () => {
 
 
 
     return (
-        <div className="container-fluid " >
 
-            {/* header */}
+        <Layout childrenHeight="84vh">
 
-            <div className="row align-items-center px-5" style={{ height: "8vh", background: "#C4E1F6" }}>
+            {/* section */}
 
-                <div className="col h2 project-title">
-                    SRM
-                </div>
-                <div className="col text-end ">
-                    <Link to="/login" className='btn button-style py-1' >Login</Link>
-                </div>
-
-            </div>
-
-
-
-            {/* content */}
-
-
-            <div className="row" style={{ height: "84vh" }}>
+            <div className="row container-fluid" >
 
                 {/* content */}
 
@@ -54,13 +42,7 @@ const Landing = () => {
 
             </div>
 
-            <div className="row d-flex align-items-center  footer" style={{ marginTop: "auto", height: "8vh" }}>
-                <div className="col text-center ">
-                    All right reserved copyright
-                    &copy; 2022 - {new Date().getFullYear()}
-                </div>
-            </div>
-        </div>
+        </Layout>
 
     )
 }
