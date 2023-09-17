@@ -1,8 +1,6 @@
 import React from 'react'
 import heroBanner from "../assets/hero.svg"
 import { Link } from 'react-router-dom'
-import Footer from '../components/Layout/Footer'
-import Header from '../components/Layout/Header'
 import Layout from '../components/Layout/Layout'
 
 const Landing = () => {
