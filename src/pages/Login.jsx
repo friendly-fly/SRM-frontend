@@ -18,13 +18,13 @@ const Login = () => {
 
                 {/* illustration body */}
 
-                <div className='w-50 d-flex justify-content-center align-items-center h-100 ' >
+                <div className='w-50 d-none d-sm-flex justify-content-center align-items-center h-100 ' >
                     <img src={loginImg} alt='login-illustration' />
                 </div>
 
                 {/* login form */}
 
-                <div className="w-50 d-flex justify-content-center align-items-center h-100 ">
+                <div className="flex-fill d-flex justify-content-center align-items-center h-100 ">
                     <form onSubmit={handleSubmit} className='p-5 rounded' style={{ border: "2px solid grey" }}>
                         <div className="mb-3">
                             <label htmlFor="exampleInputEmail1" className="form-label">Username</label>
