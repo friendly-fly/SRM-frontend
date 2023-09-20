@@ -2,6 +2,7 @@ import React from 'react'
 import heroBanner from "../assets/hero.svg"
 import { Link } from 'react-router-dom'
 import Layout from '../components/Layout/Layout'
+import Illustation from '../components/Illustation'
 
 const Landing = () => {
 
@@ -12,7 +13,7 @@ const Landing = () => {
         <Layout childrenHeight="84vh">
             <div className="container-fluid d-flex justify-content-center align-items-center  h-100">
                 <LandingPageContent />
-                <LandingPageIllustration />
+                <Illustation heroBanner={heroBanner} />
             </div>
         </Layout>
 
@@ -42,14 +43,3 @@ const LandingPageContent = () => {
     )
 }
 
-const LandingPageIllustration = () => {
-    return (
-        <>
-            <div className="flex-fill container-fluid d-flex justify-content-center h-100 d-none d-sm-block ">
-
-                <img style={{ maxHeight: "100%" }} className='img-fluid' src={heroBanner} alt="hero-banner" />
-
-            </div>
-        </>
-    )
-}
