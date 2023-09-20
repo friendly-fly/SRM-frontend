@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import logo from "../../assets/logo.png"
+import LinkButton from '../LinkButton'
 
 const Header = () => {
     return (
@@ -17,8 +18,7 @@ const Header = () => {
 
             </div>
             <div className="flex-fill text-end ">
-                <Link to="/login" className='btn button-style py-1' >Login</Link>
-
+                <LinkButton btnText={"Login"} link="/login" />
 
             </div>
 
