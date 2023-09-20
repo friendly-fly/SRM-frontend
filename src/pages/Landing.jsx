@@ -3,6 +3,7 @@ import heroBanner from "../assets/hero.svg"
 import { Link } from 'react-router-dom'
 import Layout from '../components/Layout/Layout'
 import Illustation from '../components/Illustation'
+import LinkButton from '../components/LinkButton'
 
 const Landing = () => {
 
@@ -35,7 +36,7 @@ const LandingPageContent = () => {
 
                 <p className='text-body-secondary'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem explicabo eaque distinctio atque quis illum hic maxime illo veniam. Sequi aut ex distinctio perferendis exercitationem doloremque tempora labore pariatur facere.</p>
                 <div >
-                    <Link to="/login" className='btn button-style' >Get Started</Link>
+                    <LinkButton btnText={"Get Started"} link="/login" />
                 </div>
             </div>
 
