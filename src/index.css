@@ -53,3 +53,8 @@ body {
     background-color: var(--four);
     font-weight: 600;
 }
+
+.form {
+    background-color: rgba(189, 194, 192, 0.491);
+    border-radius: 10px;
+}
