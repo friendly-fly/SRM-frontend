@@ -58,3 +58,20 @@ body {
     background-color: rgba(189, 194, 192, 0.491);
     border-radius: 10px;
 }
+
+/* header css */
+.customHeaderStyle {
+    height: 8vh;
+    background-color: var(--four);
+}
+
+
+/* header mediaQuery */
+@media screen and (max-width: 480px) {
+    .customHeaderStyle {
+        border-radius: 10px;
+        background-color: transparent !important;
+        border-bottom: 1px solid white;
+        box-shadow: 0px 8px 8px rgba(128, 128, 128, 0.331);
+    }
+}
