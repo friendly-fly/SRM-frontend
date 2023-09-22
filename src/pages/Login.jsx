@@ -30,6 +30,7 @@ const LoginContent = () => {
     return (
         <div className='container-fluid h-100 d-flex align-items-center justify-content-center '>
             <form className='form p-5' onSubmit={handleSubmit}>
+                <h3 className='h3 text-center mb-4 loginTitle'>Login</h3>
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Username</label>
                     <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />

@@ -55,8 +55,19 @@ body {
 }
 
 .form {
-    background-color: rgba(189, 194, 192, 0.491);
-    border-radius: 10px;
+    background-color: grey;
+    border-radius: 5px;
+    color: white;
+}
+
+.loginTitle {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.825);
+    font-family: blanka;
+
+
 }
 
 /* header css */
