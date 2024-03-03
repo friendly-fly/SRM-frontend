@@ -116,14 +116,13 @@ const PersonalDetails = () => {
 
 const DetailsFieldPreviewerOrEditor = ({ title, titleContent }) => {
   const [isEditable, setIsEditable] = useState(false);
-  const [data , setData] = useState(titleContent)
+  const [data, setData] = useState(titleContent);
 
   // edit details
   const onEdit = () => {
-    alert("Edit functionality is not implemented yet." + data)
-    setIsEditable(pre => !pre)
-
-  }
+    alert("Edit functionality is not implemented yet." + data);
+    setIsEditable((pre) => !pre);
+  };
   return (
     <div className="my-2 flex  gap-2 items-center text-lg font-semibold  font-nunito text-slate-600">
       <label>{title}: </label>
@@ -142,16 +141,25 @@ const DetailsFieldPreviewerOrEditor = ({ title, titleContent }) => {
 
       {/* for button */}
       {isEditable ? (
-        <IoIosCloudDone className=" text-3xl cursor-pointer text-green-600" onClick={onEdit}/>
+        <IoIosCloudDone
+          className=" text-3xl cursor-pointer text-green-600"
+          onClick={onEdit}
+        />
       ) : (
-        <CiEdit className="hover:scale-150 text-xl cursor-pointer hover:text-green-600" onClick={() => setIsEditable(pre => !pre)}/>
+        <CiEdit
+          className="hover:scale-150 text-xl cursor-pointer hover:text-green-600"
+          onClick={() => setIsEditable((pre) => !pre)}
+        />
       )}
     </div>
   );
 };
 
 const AcademicDetails = () => {
-  return <h1>Acadamic detaisl</h1>;
+  return (
+    <div>
+    </div>
+  );
 };
 
 const FinanceDetails = () => {
@@ -159,5 +167,34 @@ const FinanceDetails = () => {
 };
 
 const Documents = () => {
-  return <h1>Documents</h1>;
+  const docData = [
+    "10th Marksheet Certificate",
+    "12th Marksheet Certificate",
+    "Diploma Certificate",
+    "Caste Certificate",
+    "Income Certificate",
+    "Residence Certificate",
+    "JEE Score Sheet",
+    "Webjee Score Sheet",
+  ];
+  return (
+    <>
+      <h1 className="text-4xl font-nunito font-extrabold text-slate-500">
+        Documents
+      </h1>
+
+      <div className="py-5 grid grid-cols-4 gap-10">
+        {docData.map((document, idx) => (
+          <a
+            href="#"
+            target="_blank"
+            key={idx}
+            className={`text-center px-4 py-2 rounded-lg bg-green-500 text-white font-semibold text-lg shadow-lg hover:scale-105 cursor-pointer duration-500`}
+          >
+            {document}
+          </a>
+        ))}
+      </div>
+    </>
+  );
 };
