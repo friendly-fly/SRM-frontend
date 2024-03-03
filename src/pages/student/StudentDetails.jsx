@@ -349,7 +349,57 @@ const AcademicDetails = () => {
 };
 
 const FinanceDetails = () => {
-  return <h1>FinanceDetails</h1>;
+  return (
+    <div className="border-2 p-4 rounded-md">
+      <h1 className="text-lg bg-cyan-300 px-3 py-1 rounded-md text-slate-500 font-semibold font-nunito">
+        Finance Details
+      </h1>
+      <div className="mb-6 font-nunito">
+        {/* heading of the academic details */}
+        <div className="grid grid-cols-3 text-center ">
+          <p className="border py-2">Semester</p>
+          <p className=" border py-2">Academic Fees</p>
+          <p className=" border py-2">Hostel Fees</p>
+        </div>
+
+        {/* fee data */}
+
+        <div>
+          <div className="grid grid-cols-3 text-center bg-green-300">
+            <p className="border py-2">1st</p>
+            <p className=" border py-2">33000</p>
+            <p className=" border py-2">6000</p>
+          </div>
+
+          <div className="grid grid-cols-3 text-center bg-green-300">
+            <p className="border py-2">2nd</p>
+            <p className=" border py-2">33000</p>
+            <p className=" border py-2">6000</p>
+          </div>
+
+          <div className="grid grid-cols-3 text-center bg-green-300">
+            <p className="border py-2">3rd</p>
+            <p className=" border py-2 ">33000</p>
+            <p className=" border py-2 bg-red-300">6000</p>
+          </div>
+
+          <div className="grid grid-cols-3 text-center bg-red-300">
+            <p className="border py-2">4th</p>
+            <p className=" border py-2">33000</p>
+            <p className=" border py-2">6000</p>
+          </div>
+        </div>
+
+        {/* due section */}
+        <div className="grid grid-cols-3 text-cente bg-yellow-200 text-center text-xl">
+          <p className="col-span-2 border py-2 font-bold font-nunito text-slate-600">
+            Due Amount
+          </p>
+          <p className=" border py-2 font-bold text-slate-600">45000</p>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 const Documents = () => {
