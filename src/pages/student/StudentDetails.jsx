@@ -157,7 +157,193 @@ const DetailsFieldPreviewerOrEditor = ({ title, titleContent }) => {
 
 const AcademicDetails = () => {
   return (
-    <div>
+    <div className="border-2 p-4 rounded-md">
+      <h1 className="text-lg bg-cyan-300 px-3 py-1 rounded-md text-slate-500 font-semibold font-nunito">
+        Academic Marks
+      </h1>
+      <div className="mb-6 ">
+        <p className="bg-slate-100 text-center py-2 rounded-sm text-md font-nunito font-semibold">
+          Eight Semester
+        </p>
+        {/* heading of the academic details */}
+        <div className="grid grid-cols-11 text-center ">
+          <p className="border py-2">Paper Code</p>
+          <p className="col-span-4 border py-2">Paper Name</p>
+          <p className="border-r-2 border py-2">CA1</p>
+          <p className="border-r-2 border py-2">CA2</p>
+          <p className="border-r-2 border py-2">CA3</p>
+          <p className="border-r-2 border py-2">CA4</p>
+          <p className="col-span-2 border py-2">Responsible Teacher</p>
+        </div>
+
+        {/* academic Data */}
+
+        <div className="[&>*:nth-child(odd)]:bg-slate-50">
+          <div className="grid grid-cols-11 text-center ">
+            <p className="border py-2">PEC_2234</p>
+            <p className="col-span-4 border py-2 ">
+              Data Structure and Algorithm
+            </p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="col-span-2 border py-2 ">Anindiya Bakshi</p>
+          </div>
+
+          <div className="grid grid-cols-11 text-center">
+            <p className="border py-2">PEC_2234</p>
+            <p className="col-span-4 border py-2 ">
+              Data Structure and Algorithm
+            </p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="col-span-2 border py-2 ">Anindiya Bakshi</p>
+          </div>
+
+          <div className="grid grid-cols-11 text-center">
+            <p className="border py-2">PEC_2234</p>
+            <p className="col-span-4 border py-2 ">
+              Data Structure and Algorithm
+            </p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="col-span-2 border py-2 ">Anindiya Bakshi</p>
+          </div>
+
+          <div className="grid grid-cols-11 text-center">
+            <p className="border py-2">PEC_2234</p>
+            <p className="col-span-4 border py-2 ">
+              Data Structure and Algorithm
+            </p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="col-span-2 border py-2 ">Anindiya Bakshi</p>
+          </div>
+
+          <div className="grid grid-cols-11 text-center">
+            <p className="border py-2">PEC_2234</p>
+            <p className="col-span-4 border py-2 ">
+              Data Structure and Algorithm
+            </p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="col-span-2 border py-2 ">Anindiya Bakshi</p>
+          </div>
+
+          <div className="grid grid-cols-11 text-center">
+            <p className="border py-2">PEC_2234</p>
+            <p className="col-span-4 border py-2 ">
+              Data Structure and Algorithm
+            </p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="col-span-2 border py-2 ">Anindiya Bakshi</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="mb-6">
+        <p className="bg-slate-100 text-center py-2 rounded-sm text-md font-nunito font-semibold">
+          Seven Semester
+        </p>
+        {/* heading of the academic details */}
+        <div className="grid grid-cols-11 text-center">
+          <p className="border py-2">Paper Code</p>
+          <p className="col-span-4 border py-2">Paper Name</p>
+          <p className="border-r-2 border py-2">CA1</p>
+          <p className="border-r-2 border py-2">CA2</p>
+          <p className="border-r-2 border py-2">CA3</p>
+          <p className="border-r-2 border py-2">CA4</p>
+          <p className="col-span-2 border py-2">Responsible Teacher</p>
+        </div>
+
+        {/* academic Data */}
+
+        <div className="[&>*:nth-child(odd)]:bg-slate-50">
+          <div className="grid grid-cols-11 text-center ">
+            <p className="border py-2">PEC_2234</p>
+            <p className="col-span-4 border py-2 ">
+              Data Structure and Algorithm
+            </p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="col-span-2 border py-2 ">Anindiya Bakshi</p>
+          </div>
+
+          <div className="grid grid-cols-11 text-center">
+            <p className="border py-2">PEC_2234</p>
+            <p className="col-span-4 border py-2 ">
+              Data Structure and Algorithm
+            </p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="col-span-2 border py-2 ">Anindiya Bakshi</p>
+          </div>
+
+          <div className="grid grid-cols-11 text-center">
+            <p className="border py-2">PEC_2234</p>
+            <p className="col-span-4 border py-2 ">
+              Data Structure and Algorithm
+            </p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="col-span-2 border py-2 ">Anindiya Bakshi</p>
+          </div>
+
+          <div className="grid grid-cols-11 text-center">
+            <p className="border py-2">PEC_2234</p>
+            <p className="col-span-4 border py-2 ">
+              Data Structure and Algorithm
+            </p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="col-span-2 border py-2 ">Anindiya Bakshi</p>
+          </div>
+
+          <div className="grid grid-cols-11 text-center">
+            <p className="border py-2">PEC_2234</p>
+            <p className="col-span-4 border py-2 ">
+              Data Structure and Algorithm
+            </p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="col-span-2 border py-2 ">Anindiya Bakshi</p>
+          </div>
+
+          <div className="grid grid-cols-11 text-center">
+            <p className="border py-2">PEC_2234</p>
+            <p className="col-span-4 border py-2 ">
+              Data Structure and Algorithm
+            </p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="border-r-2 border py-2">0</p>
+            <p className="col-span-2 border py-2 ">Anindiya Bakshi</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
