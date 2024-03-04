@@ -8,11 +8,12 @@ import AdmissionForm from "./pages/student/AdmissionForm";
 import StudentDetails from "./pages/student/StudentDetails";
 import StudentsList from "./components/StudentsList";
 import AllStudentsList from "./pages/student/AllStudentsList";
+import Dashboard from "./pages/dashboard/Dashboard";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Header />
+      {/* <Header /> */}
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/login" element={<Login />} />
@@ -24,6 +25,7 @@ const App = () => {
         />
 
         <Route path="/all-students-details" element={<AllStudentsList />} />
+        <Route path="/dashboard" element={<Dashboard/>} />
       </Routes>
       {/* <Footer/> */}
     </BrowserRouter>
