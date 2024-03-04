@@ -1,6 +1,6 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const StudentsList = () => {
   const location = useLocation();
@@ -104,8 +104,9 @@ const DetailsContainer = ({
   address,
   due,
 }) => {
+  const navigate = useNavigate()
   return (
-    <div className="grid grid-cols-10 text-center cursor-pointer hover:text-green-700 hover:font-bold">
+    <div className="grid grid-cols-10 text-center cursor-pointer hover:text-green-700 hover:font-bold" onClick={()=> navigate("/dashboard/student-details")}>
       <p className="col-span-2 border py-2">{regNum}</p>
       <p className="border py-2 ">{rollNum}</p>
       <p className="col-span-2 border-r-2 border py-2">{fullName}</p>
