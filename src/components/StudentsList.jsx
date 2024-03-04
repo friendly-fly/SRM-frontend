@@ -40,7 +40,7 @@ const StudentsList = () => {
       <div className="border py-3 mt-2">
         <div className="mb-6 p-1">
           {/* heading of the academic details */}
-          <div className="grid grid-cols-10 text-center font-bold text-lg sticky top-0 bg-white">
+          <div className="grid grid-cols-10 text-center font-bold text-md sticky top-0 bg-white">
             <p className="col-span-2 border py-2">Registration Number</p>
             <p className="border-r-2 border py-2">Roll Number</p>
             <p className="col-span-2 border py-2">Full Name</p>
