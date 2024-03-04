@@ -4,7 +4,7 @@ import StudentsList from "../../components/StudentsList";
 const AllStudentsList = () => {
   return (
     <div>
-      <form className="py-2 border-2 rounded-md bg-cyan-200 flex items-center gap-6 justify-end pr-4">
+      <form className="py-3 shadow-xl bg-pink-100 flex items-center gap-6 justify-end pr-4">
         {/* passing batch select */}
         <div className="flex gap-2 items-center">
           <label className="font-nunito font-bold text-slate-600 text-md px-1">
