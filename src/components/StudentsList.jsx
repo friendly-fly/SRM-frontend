@@ -19,7 +19,7 @@ const StudentsList = () => {
         <p className=" text-slate-700 font-bold uppercase">
           Students List CSE-2024 batch
         </p>
-        {currentURL !== "/all-students-details" && <form className="flex items-center" onSubmit={handleSubmit}>
+        {currentURL !== "/dashboard/all-students-details" && <form className="flex items-center" onSubmit={handleSubmit}>
           <input
             className="pl-5 w-[400px] py-1 border-2 rounded-full rounded-r-none text-center"
             type="number"
