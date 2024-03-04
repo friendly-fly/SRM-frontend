@@ -6,7 +6,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AdmissionForm from "./pages/student/AdmissionForm";
 import StudentDetails from "./pages/student/StudentDetails";
-import StudentsList from "./pages/student/StudentsList";
+import StudentsList from "./components/StudentsList";
+import AllStudentsList from "./pages/student/AllStudentsList";
 
 const App = () => {
   return (
@@ -21,6 +22,8 @@ const App = () => {
           path="/students-list/:registrationNumber"
           element={<StudentsList />}
         />
+
+        <Route path="/all-students-details" element={<AllStudentsList />} />
       </Routes>
       {/* <Footer/> */}
     </BrowserRouter>
