@@ -1,34 +1,33 @@
 import React from "react";
-import { MdDashboard } from "react-icons/md";
-import { PiStudentBold } from "react-icons/pi";
-import { MdManageAccounts } from "react-icons/md";
-import { BiAnalyse } from "react-icons/bi";
+import {Route, Routes } from "react-router-dom";
+import AdmissionForm from "../../pages/student/AdmissionForm";
+import StudentDetails from "../../pages/student/StudentDetails";
+import StudentsList from "../../components/StudentsList";
+import AllStudentsList from "../../pages/student/AllStudentsList";
+import SideBar from "../../components/Sidebar";
 
 const Dashboard = () => {
   return (
     <div className="flex ">
-      {/* sidebar for menu*/}
-      <div className="w-[300px] border h-screen bg-slate-100">
-        <p className="text-2xl font-bold text-slate-500 px-5 py-2 font-nunito border-b-2">
-          S<span className="text-cyan-400">R</span>M
-        </p>
+      <SideBar />
+      <Content />
+    </div>
+  );
+};
 
-        <div className="mt-8">
-        <ul className="flex flex-col gap-6 pl-6">
-            <li className="text-md font-nunito flex items-center gap-1 cursor-pointer"><MdDashboard /> Dashboard</li>
-            <li className="text-md font-nunito flex items-center gap-1 cursor-pointer"><PiStudentBold/> Admission</li>
-            <li className="text-md font-nunito flex items-center gap-1"><MdManageAccounts />
-Student Management</li>
-            <li className="text-md font-nunito flex items-center gap-1"><BiAnalyse /> Resport and Analysis</li>
-        </ul>
-        </div>
-      </div>
+const Content = () => {
+  return (
+    <div className="border flex-1 overflow-auto h-screen">
+      <Routes>
+        <Route path="/admission-form" element={<AdmissionForm />} />
+        <Route path="/student-details" element={<StudentDetails />} />
+        <Route
+          path="/students-list/:registrationNumber"
+          element={<StudentsList />}
+        />
 
-
-      {/* content */}
-      <div className="border p-5 flex-1">
-          
-      </div>
+        <Route path="/all-students-details" element={<AllStudentsList />} />
+      </Routes>
     </div>
   );
 };
