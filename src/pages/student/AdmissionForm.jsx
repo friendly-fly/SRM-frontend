@@ -32,7 +32,7 @@ const AdmissionForm = () => {
         </h1>
         <div className="w-52 bg-cyan-500 h-[1.5px] mt-2 rounded-lg text-center"></div>
       </div>
-      <form onSubmit={handleSubmit} className="grid grid-cols-4 gap-8">
+      <form onSubmit={handleSubmit} className="grid gap-5">
         <InputField labelName={"Name"} fieldValue={name} onChangeHandler={setName}/>
         <InputField labelName={"Father's Name"} fieldValue={fathersName} onChangeHandler={setFathersName}/>
         <InputField labelName={"Mother's Name"} fieldValue={mothersName} onChangeHandler={setMothersName}/>
@@ -51,7 +51,7 @@ const AdmissionForm = () => {
         <FileInputField labelName={"Diploma Mark Sheet"} require={false} onChangeHandler={setDiplomaMarkSheet}/>
 
 
-        <div className="col-span-4 text-center ">
+        <div className="col-span-3 text-center ">
             <input type="submit" value={"Apply"} className="px-5 py-2 rounded-lg bg-yellow-500 text-white  font-nunito font-bold cursor-pointer hover:scale-110 hover:bg-green-500 duration-700"  />
         </div>
 
