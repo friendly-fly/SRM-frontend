@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const Sidebar = () => {
   const [menu, setMenu] = useState("dashboard");
   return (
-    <div className="w-[280px] border h-screen bg-slate-100">
+    <div className="w-[250px] border h-screen bg-slate-100">
       <p className="text-2xl font-bold text-slate-500 px-5 py-2  border-b-2">
         S<span className="text-cyan-400">R</span>M
       </p>
