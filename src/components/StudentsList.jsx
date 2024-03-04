@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 const StudentsList = () => {
   const location = useLocation();
   const currentURL = location.pathname;
-  console.log(currentURL)
+  console.log(currentURL);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,20 +19,21 @@ const StudentsList = () => {
         <p className=" text-slate-700 font-bold uppercase">
           Students List CSE-2024 batch
         </p>
-        {currentURL !== "/dashboard/all-students-details" && <form className="flex items-center" onSubmit={handleSubmit}>
-          <input
-            className="pl-5 w-[400px] py-1 border-2 rounded-full rounded-r-none text-center"
-            type="number"
-            placeholder="Registration Number"
-          />
-          <button
-            type="submit"
-            className="py-2 -ml-1 px-3 bg-green-600 border-2 rounded-full rounded-l-none "
-          >
-            <FaSearch className="text-white" />
-          </button>
-        </form>}
-  
+        {currentURL !== "/dashboard/all-students-details" && (
+          <form className="flex items-center" onSubmit={handleSubmit}>
+            <input
+              className="pl-5 w-[400px] py-1 border-2 rounded-full rounded-r-none text-center"
+              type="number"
+              placeholder="Registration Number"
+            />
+            <button
+              type="submit"
+              className="py-2 -ml-1 px-3 bg-green-600 border-2 rounded-full rounded-l-none "
+            >
+              <FaSearch className="text-white" />
+            </button>
+          </form>
+        )}
       </div>
 
       {/* studnets list section */}
@@ -51,60 +52,41 @@ const StudentsList = () => {
           {/* academic Data */}
 
           <div className="[&>*:nth-child(odd)]:bg-slate-100">
-            <div className="grid grid-cols-10 text-center cursor-pointer hover:text-green-700 hover:text-lg hover:font-bold">
-              <p className="col-span-2 border py-2">1060012000837479</p>
-              <p className="border py-2 ">01</p>
-              <p className="col-span-2 border-r-2 border py-2">Anish Kumar</p>
-              <p className="border-r-2 border py-2">7479863918</p>
-              <p className="col-span-3 border-r-2 border py-2">
-                Daulatpur Devariya, Hajipur, Vaishail, Bihar, 844102
-              </p>
-              <p className="border-r-2 border py-2">33000</p>
-            </div>
+            <DetailsContainer
+              regNum={"1234353456345"}
+              rollNum={11}
+              fullName={"Manish Gupt"}
+              mobileNum={6204977821}
+              address={"Hajipur, Vaishali, Bihar"}
+              due={2300}
+            />
 
-            <div className="grid grid-cols-10 text-center cursor-pointer hover:text-green-700 hover:text-lg hover:font-bold">
-              <p className="col-span-2 border py-2">1060012000837479</p>
-              <p className="border py-2 ">01</p>
-              <p className="col-span-2 border-r-2 border py-2">Anish Kumar</p>
-              <p className="border-r-2 border py-2">7479863918</p>
-              <p className="col-span-3 border-r-2 border py-2">
-                Daulatpur Devariya, Hajipur, Vaishail, Bihar, 844102
-              </p>
-              <p className="border-r-2 border py-2">33000</p>
-            </div>
+            <DetailsContainer
+              regNum={"1234353456345"}
+              rollNum={11}
+              fullName={"Manish Gupt"}
+              mobileNum={6204977821}
+              address={"Hajipur, Vaishali, Bihar"}
+              due={2300}
+            />
 
-            <div className="grid grid-cols-10 text-center cursor-pointer hover:text-green-700 hover:text-lg hover:font-bold">
-              <p className="col-span-2 border py-2">1060012000837479</p>
-              <p className="border py-2 ">01</p>
-              <p className="col-span-2 border-r-2 border py-2">Anish Kumar</p>
-              <p className="border-r-2 border py-2">7479863918</p>
-              <p className="col-span-3 border-r-2 border py-2">
-                Daulatpur Devariya, Hajipur, Vaishail, Bihar, 844102
-              </p>
-              <p className="border-r-2 border py-2">33000</p>
-            </div>
+            <DetailsContainer
+              regNum={"1234353456345"}
+              rollNum={11}
+              fullName={"Manish Gupt"}
+              mobileNum={6204977821}
+              address={"Hajipur, Vaishali, Bihar"}
+              due={2300}
+            />
 
-            <div className="grid grid-cols-10 text-center cursor-pointer hover:text-green-700 hover:text-lg hover:font-bold">
-              <p className="col-span-2 border py-2">1060012000837479</p>
-              <p className="border py-2 ">01</p>
-              <p className="col-span-2 border-r-2 border py-2">Anish Kumar</p>
-              <p className="border-r-2 border py-2">7479863918</p>
-              <p className="col-span-3 border-r-2 border py-2">
-                Daulatpur Devariya, Hajipur, Vaishail, Bihar, 844102
-              </p>
-              <p className="border-r-2 border py-2">33000</p>
-            </div>
-
-            <div className="grid grid-cols-10 text-center cursor-pointer hover:text-green-700 hover:text-lg hover:font-bold">
-              <p className="col-span-2 border py-2">1060012000837479</p>
-              <p className="border py-2 ">01</p>
-              <p className="col-span-2 border-r-2 border py-2">Anish Kumar</p>
-              <p className="border-r-2 border py-2">7479863918</p>
-              <p className="col-span-3 border-r-2 border py-2">
-                Daulatpur Devariya, Hajipur, Vaishail, Bihar, 844102
-              </p>
-              <p className="border-r-2 border py-2">33000</p>
-            </div>
+            <DetailsContainer
+              regNum={"1234353456345"}
+              rollNum={11}
+              fullName={"Manish Gupt"}
+              mobileNum={6204977821}
+              address={"Hajipur, Vaishali, Bihar"}
+              due={2300}
+            />
           </div>
         </div>
       </div>
@@ -113,3 +95,23 @@ const StudentsList = () => {
 };
 
 export default StudentsList;
+
+const DetailsContainer = ({
+  regNum,
+  rollNum,
+  fullName,
+  mobileNum,
+  address,
+  due,
+}) => {
+  return (
+    <div className="grid grid-cols-10 text-center cursor-pointer hover:text-green-700 hover:font-bold">
+      <p className="col-span-2 border py-2">{regNum}</p>
+      <p className="border py-2 ">{rollNum}</p>
+      <p className="col-span-2 border-r-2 border py-2">{fullName}</p>
+      <p className="border-r-2 border py-2">{mobileNum}</p>
+      <p className="col-span-3 border-r-2 border py-2">{address}</p>
+      <p className="border-r-2 border py-2">{due}</p>
+    </div>
+  );
+};
