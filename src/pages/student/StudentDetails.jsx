@@ -55,18 +55,18 @@ export default StudentDetails;
 
 const PersonalDetails = () => {
   return (
-    <div className="bg-slate-50 px-8">
+    <div className="border px-8">
       {/* avatar img container*/}
-      <div className="rounded-md">
+      <div className="rounded-md mt-2">
         <img
-          className="max-h-40 rounded-full object-contain"
+          className="max-h-32 rounded-full object-contain"
           src="https://i.pinimg.com/564x/4e/09/49/4e09490e358cde38862495e8292621c1.jpg"
           alt="avatar-img"
         />
       </div>
 
       {/* prsonal details */}
-      <div className="grid grid-cols-3 gap-5 my-3">
+      <div className="grid grid-cols-2 gap-3 my-3">
         <DetailsFieldPreviewerOrEditor
           title={"Name"}
           titleContent={"Manish Kumar"}
@@ -126,8 +126,8 @@ const DetailsFieldPreviewerOrEditor = ({ title, titleContent }) => {
     setIsEditable((pre) => !pre);
   };
   return (
-    <div className="my-2 flex  gap-2 items-center text-lg font-semibold  font-nunito text-slate-600">
-      <label>{title}: </label>
+    <div className="my-2 flex  gap-2 items-center text-slate-800 font-nunito text-lg">
+      <label className="font-bold">{title}: </label>
 
       {/* for content */}
       {isEditable ? (
@@ -138,7 +138,7 @@ const DetailsFieldPreviewerOrEditor = ({ title, titleContent }) => {
           className="rounded-md px-2 py-2 text-xl mt-2 border-slate-400 border w-72"
         />
       ) : (
-        <p>{titleContent}</p>
+        <p className="text-md text-slate-600 font-normal">{titleContent}</p>
       )}
 
       {/* for button */}
