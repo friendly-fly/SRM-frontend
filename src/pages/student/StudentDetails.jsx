@@ -23,7 +23,7 @@ const StudentDetails = () => {
               <div
                 className={`cursor-pointer ${
                   navtab === navigationTab &&
-                  "bg-green-600 px-4 py-1 rounded-md text-white"
+                  "text-blue-800 bg-green-400 px-4 py-1 rounded-md"
                 }`}
                 key={idx}
                 onClick={() => setNavigationTab(navtab)}
