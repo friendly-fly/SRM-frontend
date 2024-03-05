@@ -357,27 +357,36 @@ const FinanceDetails = () => {
 
     // update fee
     const submitHandler = (e) => {
-       e.preventDefault();
-       alert("This feature is not implemented yet.")
-       setEnableInputField(false)
-    }
+      e.preventDefault();
+      const confirm = window.confirm("Do you really want to update..");
+      if (confirm) {
+        alert("This feature is not implemented yet.");
+        setEnableInputField(false);
+      }
+    };
 
     console.log(enableInputField + " " + inputData);
     return (
-      <div className="grid grid-cols-6 text-center bg-green-300">
+      <div className="grid grid-cols-6 text-center bg-green-300 overflow-hidden">
         <p className="border py-2">1st</p>
         <p className="col-span-2 border py-2">33000</p>
         <p className="col-span-2 border py-2">6000</p>
 
         {enableInputField ? (
-          <form onSubmit={submitHandler} className="relative flex gap-2 items-center">
+          <form
+            onSubmit={submitHandler}
+            className="relative flex gap-2 items-center"
+          >
             <input
               className=" py-2 pl-2 font-bold"
               type="number"
               value={inputData}
               onChange={(e) => setInputData(e.target.value)}
             />
-            <IoCheckmarkDoneCircleOutline className="absolute top-1 right-0 cursor-pointer text-4xl text-white font-bold  rounded-full bg-green-700 hover:scale-110" />
+            <IoCheckmarkDoneCircleOutline
+              className="absolute top-1 right-0 cursor-pointer text-4xl text-white font-bold  rounded-full bg-green-700 hover:scale-110"
+              onClick={submitHandler}
+            />
           </form>
         ) : (
           <p
