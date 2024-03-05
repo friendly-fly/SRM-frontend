@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import heroLink from "../assets/hero.png";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const Login = () => {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
@@ -8,20 +10,22 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  
-
   return (
-    <div className=" flex">
-      {/* left section*/}
-      <div className="basis-3/5 py-32 flex justify-center">
-        <LoginForm/>
+    <>
+      <Header />
+      <div className=" flex">
+        {/* left section*/}
+        <div className="basis-3/5 py-32 flex justify-center">
+          <LoginForm />
+        </div>
+
+        {/* right section*/}
+        <div className="hidden md:block basis-2/5">
+          <img className="object-contain" src={heroLink} alt="hero-img" />
+        </div>
       </div>
-         
-      {/* right section*/}
-      <div className="hidden md:block basis-2/5">
-        <img className="object-contain" src={heroLink} alt="hero-img" />
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
@@ -35,21 +39,21 @@ const LoginForm = () => {
 
   //handle submit
   const handleSubmit = (e) => {
-    e.preventDefault()
-    alert("Clicked")
+    e.preventDefault();
+    alert("Clicked");
   };
   return (
-    <div className="sm:bg-slate-600 text-white  rounded-lg sm:p-8 mt-5">
-      <h1 className="text-center text-4xl font-dmsans font-bold">Login</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-7">
+    <div className="border border-slate-500 text-white  rounded-lg sm:p-8 mt-5">
+      <h1 className="text-center text-4xl font-dmsans font-bold text-slate-500">Login</h1>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-7 text-slate-600">
         <div>
-          <label className="font-semi-bold"> User Name</label>
+          <label className="font-semi-bold "> User Name</label>
           <br />
           <input
             type="text"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
-            className="rounded-md px-2 py-2 text-xl mt-2 bg-slate-500 w-72"
+            className="rounded-md px-2 py-2 text-xl mt-2 border-2 border-slate-400 w-72"
           />
         </div>
 
@@ -60,13 +64,19 @@ const LoginForm = () => {
             type={isPasswordVisible ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="rounded-md px-2 py-2 text-xl mt-2 bg-slate-500  w-72"
+            className="rounded-md px-2 py-2 text-xl mt-2 border-2 border-slate-400  w-72"
           />
-          <div className="absolute right-3 bottom-3 text-black">
+          <div className="absolute right-3 bottom-3 text-slate-600">
             {isPasswordVisible ? (
-              <FaEye onClick={() => setPasswordVisible((pre) => !pre)} className="cursor-pointer"/>
+              <FaEye
+                onClick={() => setPasswordVisible((pre) => !pre)}
+                className="cursor-pointer"
+              />
             ) : (
-              <FaEyeSlash onClick={() => setPasswordVisible((pre) => !pre)} className="cursor-pointer"/>
+              <FaEyeSlash
+                onClick={() => setPasswordVisible((pre) => !pre)}
+                className="cursor-pointer"
+              />
             )}
           </div>
         </div>
@@ -75,7 +85,7 @@ const LoginForm = () => {
           <input
             type="submit"
             value="Login"
-            className="bg-green-700 px-4 py-2 text-xl rounded-md font-bold cursor-pointer hover:bg-green-600 "
+            className="bg-green-500 px-4 py-2 text-xl rounded-md font-bold text-white cursor-pointer hover:bg-green-600 "
           />
         </div>
       </form>
