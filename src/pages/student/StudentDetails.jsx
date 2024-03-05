@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { IoIosCloudDone } from "react-icons/io";
 import { FaRupeeSign } from "react-icons/fa";
-
+import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 
 const NAVIGATION_DATA = [
   "Personal Details",
@@ -352,12 +352,41 @@ const AcademicDetails = () => {
 
 const FinanceDetails = () => {
   const FeeData = () => {
+    const [enableInputField, setEnableInputField] = useState(false);
+    const [inputData, setInputData] = useState();
+
+    // update fee
+    const submitHandler = (e) => {
+       e.preventDefault();
+       alert("This feature is not implemented yet.")
+       setEnableInputField(false)
+    }
+
+    console.log(enableInputField + " " + inputData);
     return (
       <div className="grid grid-cols-6 text-center bg-green-300">
         <p className="border py-2">1st</p>
         <p className="col-span-2 border py-2">33000</p>
         <p className="col-span-2 border py-2">6000</p>
-        <p className=" border py-2">6000</p>
+
+        {enableInputField ? (
+          <form onSubmit={submitHandler} className="relative flex gap-2 items-center">
+            <input
+              className=" py-2 pl-2 font-bold"
+              type="number"
+              value={inputData}
+              onChange={(e) => setInputData(e.target.value)}
+            />
+            <IoCheckmarkDoneCircleOutline className="absolute top-1 right-0 cursor-pointer text-4xl text-white font-bold  rounded-full bg-green-700 hover:scale-110" />
+          </form>
+        ) : (
+          <p
+            className=" border py-2 cursor-pointer "
+            onDoubleClick={() => setEnableInputField(true)}
+          >
+            6000
+          </p>
+        )}
       </div>
     );
   };
@@ -379,19 +408,20 @@ const FinanceDetails = () => {
       </h1>
       <div className="mb-6 font-nunito">
         <FeeDataHeading />
-          <FeeData />
-          <FeeData />
-          <FeeData />
-          <FeeData />
-          <FeeData />
-
+        <FeeData />
+        <FeeData />
+        <FeeData />
+        <FeeData />
+        <FeeData />
 
         {/* due section */}
         <div className="grid grid-cols-6 text-cente bg-yellow-200 text-center text-xl">
           <p className="col-span-5 border py-2 font-bold font-nunito text-slate-600">
             Due Amount
           </p>
-          <p className=" border py-2 font-bold text-slate-600 flex items-center justify-center gap-1"><FaRupeeSign/> 45000</p>
+          <p className=" border py-2 font-bold text-slate-600 flex items-center justify-center gap-1">
+            <FaRupeeSign /> 45000
+          </p>
         </div>
       </div>
     </div>
