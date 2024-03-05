@@ -460,7 +460,7 @@ const Documents = () => {
             href="#"
             target="_blank"
             key={idx}
-            className={`text-center px-4 py-2 rounded-lg bg-green-500 text-white font-semibold text-lg shadow-lg hover:scale-105 cursor-pointer duration-500`}
+            className={`text-center px-4 py-2 rounded-lg bg-slate-100 font-semibold text-md shadow-lg hover:scale-105 hover:bg-slate-200 cursor-pointer duration-300`}
           >
             {document}
           </a>
