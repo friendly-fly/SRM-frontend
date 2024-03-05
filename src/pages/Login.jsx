@@ -3,6 +3,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import heroLink from "../assets/hero.png";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
@@ -36,11 +37,15 @@ const LoginForm = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
 
   //handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Clicked");
+    const confirm = window.confirm("You want to preview DASHBOARD.")
+    if(confirm) {
+      navigate("/dashboard")
+    }
   };
   return (
     <div className="border border-slate-500 text-white  rounded-lg sm:p-8 mt-5">
