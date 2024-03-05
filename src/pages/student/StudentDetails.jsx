@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { IoIosCloudDone } from "react-icons/io";
+import { FaRupeeSign } from "react-icons/fa";
+
 
 const NAVIGATION_DATA = [
   "Personal Details",
@@ -389,7 +391,7 @@ const FinanceDetails = () => {
           <p className="col-span-5 border py-2 font-bold font-nunito text-slate-600">
             Due Amount
           </p>
-          <p className=" border py-2 font-bold text-slate-600">45000</p>
+          <p className=" border py-2 font-bold text-slate-600 flex items-center justify-center gap-1"><FaRupeeSign/> 45000</p>
         </div>
       </div>
     </div>
