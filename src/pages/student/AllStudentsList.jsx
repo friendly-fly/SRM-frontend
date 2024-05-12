@@ -35,7 +35,26 @@ const AllStudentsList = () => {
           </select>
         </div>
 
-        <button type="submit" className="px-4 py-1 text-lg bg-green-400 rounded-md text-white hover:scale-110 duration-500 cursor-pointer font-nunito font-bold">Filter</button>
+        {/* university select */}
+        <div className="flex gap-2 items-center">
+          <label className="font-nunito font-bold text-slate-600 text-md px-1">
+            University Roll:
+          </label>
+          <select className="border-2 shadow-sm text-md font-bold font-nunito text-slate-600 px-2 py-1 rounded-lg cursor-pointer">
+            <option>***select-option***</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+        </div>
+
+        <button
+          type="submit"
+          className="px-4 py-1 text-lg bg-green-400 rounded-md text-white hover:scale-110 duration-500 cursor-pointer font-nunito font-bold"
+        >
+          Filter
+        </button>
       </form>
       <StudentsList />
       <StudentsList />
