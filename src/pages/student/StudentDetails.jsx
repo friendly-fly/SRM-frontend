@@ -53,68 +53,68 @@ const StudentDetails = () => {
 
 export default StudentDetails;
 
-const PersonalDetails = () => {
-  return (
-    <div className="border px-8">
-      {/* avatar img container*/}
-      <div className="rounded-md mt-2">
-        <img
-          className="max-h-32 rounded-full object-contain"
-          src="https://i.pinimg.com/564x/4e/09/49/4e09490e358cde38862495e8292621c1.jpg"
-          alt="avatar-img"
-        />
-      </div>
+// const PersonalDetails = () => {
+//   return (
+//     <div className="border px-8">
+//       {/* avatar img container*/}
+//       <div className="rounded-md mt-2">
+//         <img
+//           className="max-h-32 rounded-full object-contain"
+//           src="https://i.pinimg.com/564x/4e/09/49/4e09490e358cde38862495e8292621c1.jpg"
+//           alt="avatar-img"
+//         />
+//       </div>
 
-      {/* prsonal details */}
-      <div className="grid grid-cols-2 gap-3 my-3">
-        <DetailsFieldPreviewerOrEditor
-          title={"Name"}
-          titleContent={"Manish Kumar"}
-        />
-        <DetailsFieldPreviewerOrEditor
-          title={"Father's Name"}
-          titleContent={"Sanjay Kumar Gupta"}
-        />
-        <DetailsFieldPreviewerOrEditor
-          title={"Mother's Name"}
-          titleContent={"Rita Devi"}
-        />
-        <DetailsFieldPreviewerOrEditor
-          title={"Guardian Name"}
-          titleContent={"Sanjay Kumar Gupta"}
-        />
-        <DetailsFieldPreviewerOrEditor
-          title={"Guardian Mobile Number"}
-          titleContent={"6204977821"}
-        />
-        <DetailsFieldPreviewerOrEditor
-          title={"Mobile Number"}
-          titleContent={"7479863918"}
-        />
-        <DetailsFieldPreviewerOrEditor
-          title={"Address"}
-          titleContent={"Daulatpur Devairy Hajipur Vaishali"}
-        />
-        <DetailsFieldPreviewerOrEditor title={"State"} titleContent={"Bihar"} />
-        <DetailsFieldPreviewerOrEditor
-          title={"PinCode"}
-          titleContent={"844102"}
-        />
-        <DetailsFieldPreviewerOrEditor title={"10th%"} titleContent={"61.6"} />
-        <DetailsFieldPreviewerOrEditor title={"12th%"} titleContent={"74"} />
-        <DetailsFieldPreviewerOrEditor
-          title={"Diploma CGPA"}
-          titleContent={"9.54"}
-        />
-        <DetailsFieldPreviewerOrEditor
-          title={"Hosteler"}
-          titleContent={"Yes"}
-        />
-        <DetailsFieldPreviewerOrEditor title={"Gender"} titleContent={"Male"} />
-      </div>
-    </div>
-  );
-};
+//       {/* prsonal details */}
+//       <div className="grid grid-cols-2 gap-3 my-3">
+//         <DetailsFieldPreviewerOrEditor
+//           title={"Name"}
+//           titleContent={"Manish Kumar"}
+//         />
+//         <DetailsFieldPreviewerOrEditor
+//           title={"Father's Name"}
+//           titleContent={"Sanjay Kumar Gupta"}
+//         />
+//         <DetailsFieldPreviewerOrEditor
+//           title={"Mother's Name"}
+//           titleContent={"Rita Devi"}
+//         />
+//         <DetailsFieldPreviewerOrEditor
+//           title={"Guardian Name"}
+//           titleContent={"Sanjay Kumar Gupta"}
+//         />
+//         <DetailsFieldPreviewerOrEditor
+//           title={"Guardian Mobile Number"}
+//           titleContent={"6204977821"}
+//         />
+//         <DetailsFieldPreviewerOrEditor
+//           title={"Mobile Number"}
+//           titleContent={"7479863918"}
+//         />
+//         <DetailsFieldPreviewerOrEditor
+//           title={"Address"}
+//           titleContent={"Daulatpur Devairy Hajipur Vaishali"}
+//         />
+//         <DetailsFieldPreviewerOrEditor title={"State"} titleContent={"Bihar"} />
+//         <DetailsFieldPreviewerOrEditor
+//           title={"PinCode"}
+//           titleContent={"844102"}
+//         />
+//         <DetailsFieldPreviewerOrEditor title={"10th%"} titleContent={"61.6"} />
+//         <DetailsFieldPreviewerOrEditor title={"12th%"} titleContent={"74"} />
+//         <DetailsFieldPreviewerOrEditor
+//           title={"Diploma CGPA"}
+//           titleContent={"9.54"}
+//         />
+//         <DetailsFieldPreviewerOrEditor
+//           title={"Hosteler"}
+//           titleContent={"Yes"}
+//         />
+//         <DetailsFieldPreviewerOrEditor title={"Gender"} titleContent={"Male"} />
+//       </div>
+//     </div>
+//   );
+// };
 
 const DetailsFieldPreviewerOrEditor = ({ title, titleContent }) => {
   const [isEditable, setIsEditable] = useState(false);
@@ -429,5 +429,51 @@ const Documents = () => {
         ))}
       </div>
     </>
+  );
+};
+
+const PersonalDetails = () => {
+  return (
+    <div>
+      <div className="border">
+        <img
+          src="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=1024x1024&w=is&k=20&c=Bs1RdueQnaAcO888WBIQsC6NvA7aVTzeRVzSd8sJfUg="
+          className="max-h-60 w-full object-cover"
+        />
+      </div>
+
+      {/* details */}
+      <div className=" my-2 grid grid-cols-3 gap-4 text-xl p-3">
+        <div className="text-slate-500  flex gap-2 items-center">
+          <label className="font-bold">{"Name"} :</label>
+          <p className="font-semibold">{"Manish Kumar"}</p>
+        </div>
+
+        <div className="text-slate-500  flex gap-2 items-center">
+          <label className="font-bold">{"Name"} :</label>
+          <p className="font-semibold">{"Manish Kumar"}</p>
+        </div>
+
+        <div className="text-slate-500  flex gap-2 items-center">
+          <label className="font-bold">{"Name"} :</label>
+          <p className="font-semibold">{"Manish Kumar"}</p>
+        </div>
+
+        <div className="text-slate-500  flex gap-2 items-center">
+          <label className="font-bold">{"Name"} :</label>
+          <p className="font-semibold">{"Manish Kumar"}</p>
+        </div>
+
+        <div className="text-slate-500  flex gap-2 items-center">
+          <label className="font-bold">{"Name"} :</label>
+          <p className="font-semibold">{"Manish Kumar"}</p>
+        </div>
+
+        <div className="text-slate-500  flex gap-2 items-center">
+          <label className="font-bold">{"Name"} :</label>
+          <p className="font-semibold">{"Manish Kumar"}</p>
+        </div>
+      </div>
+    </div>
   );
 };
