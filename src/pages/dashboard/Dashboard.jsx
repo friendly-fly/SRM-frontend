@@ -9,6 +9,7 @@ import DateAndTime from "../../components/DateAndTime";
 import { IoMdLogOut } from "react-icons/io";
 import BatchByInformation from "../../components/BatchByInformation";
 import DueFeePieChart from "../../components/DueFeePieChart";
+import StudentFeePayment from "../student/StudentFeePayment";
 
 const Dashboard = () => {
   return (
@@ -37,6 +38,7 @@ const Content = () => {
         <Route path="/admission-form" element={<AdmissionForm />} />
         <Route path="/student-details" element={<StudentDetails />} />
         <Route path="/students-list" element={<StudentsList />} />
+        <Route path="/student-fees" element={<StudentFeePayment />} />
 
         <Route path="/all-students-details" element={<AllStudentsList />} />
       </Routes>
