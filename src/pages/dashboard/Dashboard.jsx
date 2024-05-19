@@ -36,16 +36,16 @@ const Content = () => {
       </div>
       <Routes>
         <Route path="/" element={<DashboardContent />} />
-        <Route path="/admission-form" element={<AdmissionForm />} />
+        <Route path="/admission" element={<AdmissionForm />} />
         <Route path="/student-details" element={<StudentDetails />} />
         <Route path="/students-list" element={<StudentsList />} />
         <Route path="/student-fees" element={<StudentFeePayment />} />
         <Route
-          path="/import-students-using-csv"
+          path="/import-Csv-file"
           element={<ImportStudentsDetailsUsingCSV />}
         />
 
-        <Route path="/all-students-details" element={<AllStudentsList />} />
+        <Route path="/all-student-details" element={<AllStudentsList />} />
       </Routes>
     </div>
   );
