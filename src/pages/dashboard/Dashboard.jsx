@@ -10,6 +10,7 @@ import { IoMdLogOut } from "react-icons/io";
 import BatchByInformation from "../../components/BatchByInformation";
 import DueFeePieChart from "../../components/DueFeePieChart";
 import StudentFeePayment from "../student/StudentFeePayment";
+import ImportStudentsDetailsUsingCSV from "../student/ImportStudentsDetailsUsingCSV";
 
 const Dashboard = () => {
   return (
@@ -39,6 +40,10 @@ const Content = () => {
         <Route path="/student-details" element={<StudentDetails />} />
         <Route path="/students-list" element={<StudentsList />} />
         <Route path="/student-fees" element={<StudentFeePayment />} />
+        <Route
+          path="/import-students-using-csv"
+          element={<ImportStudentsDetailsUsingCSV />}
+        />
 
         <Route path="/all-students-details" element={<AllStudentsList />} />
       </Routes>
