@@ -7,13 +7,13 @@ import Papa from "papaparse";
 const ImportStudentsDetailsUsingCSV = () => {
   const inputFileRef = useRef(null);
   const [csvFile, setCSVFile] = useState("");
-
   const [data, setData] = useState([]);
   const [columns, setColumns] = useState([]);
-  console.log(data);
-  const getDataFromCSVFile = () => {
-    if (csvFile) {
-      Papa.parse(csvFile, {
+
+  const getDataFromCSVFile = (file) => {
+    if (file) {
+      setCSVFile(file);
+      Papa.parse(file, {
         header: true,
         skipEmptyLines: true,
         complete: (result) => {
@@ -25,7 +25,9 @@ const ImportStudentsDetailsUsingCSV = () => {
   };
 
   const uploadCSVFileData = () => {
-    getDataFromCSVFile();
+    // getDataFromCSVFile();
+    console.log(columns);
+    console.log(data);
   };
   return (
     <div>
@@ -33,8 +35,8 @@ const ImportStudentsDetailsUsingCSV = () => {
         Import Students Details Using CSV File
       </h1>
 
-      <div className="flex justify-center mt-20">
-        <div className="flex flex-col justify-center">
+      <div className="flex justify-center my-40">
+        <div className="flex flex-col justify-center items-center">
           <div
             className="w-32 h-32 rounded-lg border-white border flex-col flex justify-center items-center cursor-pointer"
             onClick={() => inputFileRef.current.click()}
@@ -44,7 +46,7 @@ const ImportStudentsDetailsUsingCSV = () => {
               type="file"
               accept=".csv"
               ref={inputFileRef}
-              onChangeCapture={(e) => setCSVFile(e.target.files[0])}
+              onChangeCapture={(e) => getDataFromCSVFile(e.target.files[0])}
               className="hidden"
             />
           </div>
