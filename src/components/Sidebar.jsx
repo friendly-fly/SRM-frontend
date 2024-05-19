@@ -6,6 +6,7 @@ import { BiAnalyse } from "react-icons/bi";
 import { FaUserGraduate } from "react-icons/fa";
 import { FaRupeeSign } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { BiSolidFileImport } from "react-icons/bi";
 
 const Sidebar = () => {
   const [menu, setMenu] = useState("dashboard");
@@ -55,6 +56,13 @@ const Sidebar = () => {
             setMenu={setMenu}
             IconName={FaRupeeSign}
             label={"Student Fees"}
+          />
+          <LinkContainer
+            to={"/dashboard/import-students-using-csv"}
+            menu={menu}
+            setMenu={setMenu}
+            IconName={BiSolidFileImport}
+            label={"Import CSV File"}
           />
         </div>
 
