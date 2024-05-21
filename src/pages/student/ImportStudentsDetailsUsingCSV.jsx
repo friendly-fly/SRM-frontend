@@ -2,35 +2,34 @@ import React from "react";
 import { useState } from "react";
 import { useRef } from "react";
 import { FaCloudUploadAlt, FaUpload } from "react-icons/fa";
-import Papa from "papaparse";
+import { toast } from "react-toastify";
+import { importStudentDetails } from "../../utils/api";
+import Loading from "../../components/Loading";
 
 const ImportStudentsDetailsUsingCSV = () => {
   const inputFileRef = useRef(null);
   const [csvFile, setCSVFile] = useState("");
-  const [data, setData] = useState([]);
-  const [columns, setColumns] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const getDataFromCSVFile = (file) => {
-    if (file) {
-      setCSVFile(file);
-      Papa.parse(file, {
-        header: true,
-        skipEmptyLines: true,
-        complete: (result) => {
-          setColumns(result.meta.fields);
-          setData(result.data);
-        },
-      });
+  const uploadCSVFileData = async () => {
+    try {
+      setLoading(true);
+      const response = await importStudentDetails(csvFile);
+      if (response.status) {
+        toast.success("Data imported sucessfully...");
+        setCSVFile(null);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.warning("Something went wrong...");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const uploadCSVFileData = () => {
-    // getDataFromCSVFile();
-    console.log(columns);
-    console.log(data);
-  };
   return (
     <div>
+      {loading && <Loading />}
       <h1 className="text-4xl font-nunito font-extrabold text-slate-500 m-3">
         Import Students Details Using CSV File
       </h1>
@@ -46,7 +45,7 @@ const ImportStudentsDetailsUsingCSV = () => {
               type="file"
               accept=".csv"
               ref={inputFileRef}
-              onChangeCapture={(e) => getDataFromCSVFile(e.target.files[0])}
+              onChangeCapture={(e) => setCSVFile(e.target.files[0])}
               className="hidden"
             />
           </div>
