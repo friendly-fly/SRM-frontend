@@ -1,10 +1,12 @@
 import React from "react";
 import heroLink from "../assets/hero.png";
 import Header from "../components/Header";
-import Footer from "../components/Footer"
+import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
-  
+  const navigate = useNavigate();
+
   return (
     <>
       <Header />
@@ -31,17 +33,17 @@ const Index = () => {
 
           {/* button */}
 
-          <div className="flex  gap-6">
-            <button className="px-3 py-1 bg-green-600  text-white rounded-md  font-semibold hover:scale-125 shadow-lg cursor-pointer">
-              Student
-            </button>
-            <button className="px-3 py-1 bg-yellow-500 rounded-md text-white font-semibold hover:scale-125 shadow-lg cursor-pointer">
+          <div className="">
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="px-3 py-1 bg-green-500 rounded-md text-white font-semibold shadow-lg cursor-pointer py-3"
+            >
               Administration
             </button>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
