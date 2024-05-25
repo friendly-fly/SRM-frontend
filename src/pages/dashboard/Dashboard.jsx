@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import AdmissionForm from "../../pages/student/AdmissionForm";
 import StudentDetails from "../../pages/student/StudentDetails";
@@ -11,6 +11,8 @@ import BatchByInformation from "../../components/BatchByInformation";
 import DueFeePieChart from "../../components/DueFeePieChart";
 import StudentFeePayment from "../student/StudentFeePayment";
 import ImportStudentsDetailsUsingCSV from "../student/ImportStudentsDetailsUsingCSV";
+import { summary } from "../../utils/api";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
   return (
@@ -52,14 +54,26 @@ const Content = () => {
 };
 
 const DashboardContent = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    summary()
+      .then((response) => response)
+      .then((responseData) => {
+        if (responseData.status) {
+          setData(responseData.summary);
+        } else {
+          toast.warning("Something went wrong");
+        }
+      })
+      .catch((error) => console.log(error));
+  }, []);
   return (
     <div className="">
       {/* student in the batch */}
       <div className="flex justify-evenly p-2 gap-8">
-        <BatchByInformation />
-        <BatchByInformation />
-        <BatchByInformation />
-        <BatchByInformation />
+        {data?.map((summaryData, idx) => {
+          return <BatchByInformation key={idx} data={summaryData} />;
+        })}
       </div>
 
       {/* due fees pie chart of each batch */}
