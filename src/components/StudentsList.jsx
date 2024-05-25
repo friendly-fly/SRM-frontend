@@ -32,9 +32,7 @@ const StudentsList = (data) => {
     <>
       {/* heading section */}
       <div className="bg-gray-100 text-xl py-3 px-8 shadow-sm flex justify-between items-center ">
-        <p className=" text-slate-700 font-bold uppercase">
-          Students List CSE-2024 batch
-        </p>
+        <p className=" text-slate-700 font-bold uppercase">Students List</p>
         {currentURL !== "/dashboard/all-students-details" && (
           <form className="flex items-center" onSubmit={handleSubmit}>
             <input
