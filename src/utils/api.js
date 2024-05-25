@@ -33,8 +33,7 @@ const summary = async () => {
 
 const getLastYearStudent = async () => {
   const currentYear = new Date().getFullYear();
-  // const uri = baseUrl + `/student?year=${currentYear}`;
-  const uri = baseUrl + "/student";
+  const uri = baseUrl + `/student?year=${currentYear}`;
   try {
     const response = await fetch(uri, {
       method: "GET",
