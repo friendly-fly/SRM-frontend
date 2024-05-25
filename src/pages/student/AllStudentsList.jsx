@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import StudentsList from "../../components/StudentsList";
-import { getLastYearStudent } from "../../utils/api";
+import {
+  getLastYearStudent,
+  getStudentByBatchAndDepartment,
+} from "../../utils/api";
 import { toast } from "react-toastify";
 
 const AllStudentsList = () => {
   const [passingBatch, setPassingBatch] = useState();
   const [department, setDepartment] = useState();
   const [studentsData, setStudentsData] = useState([]);
-  // const [universityRoll, setUniversityRoll] = useState();
-
-  // console.log(universityRoll);
 
   useEffect(() => {
     getLastYearStudent()
@@ -24,9 +24,37 @@ const AllStudentsList = () => {
       .catch((error) => console.log(error));
   }, []);
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (!passingBatch) {
+      toast.warning("Please select Passing Batch");
+    }
+
+    if (!department) {
+      toast.warning("Please select Department");
+    }
+
+    try {
+      const response = await getStudentByBatchAndDepartment(
+        passingBatch,
+        department
+      );
+
+      if (response.status) {
+        setStudentsData(response.students);
+      }
+    } catch (error) {
+      toast.warning("Something went wrong");
+      console.log(error);
+    }
+  };
+
   return (
     <div>
-      <form className="py-3 shadow-inner flex items-center gap-6 justify-end pr-4">
+      <form
+        className="py-3 shadow-inner flex items-center gap-6 justify-end pr-4"
+        onSubmit={submitHandler}
+      >
         {/* passing batch select */}
         <div className="flex gap-2 items-center">
           <label className="font-nunito font-bold text-slate-600 text-md px-1">
@@ -73,7 +101,6 @@ const AllStudentsList = () => {
         </button>
       </form>
       <StudentsList studentsData={studentsData} />
-      <StudentsList />
     </div>
   );
 };
