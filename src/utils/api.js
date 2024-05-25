@@ -31,4 +31,38 @@ const summary = async () => {
   }
 };
 
-export { importStudentDetails, summary };
+const getLastYearStudent = async () => {
+  const currentYear = new Date().getFullYear();
+  // const uri = baseUrl + `/student?year=${currentYear}`;
+  const uri = baseUrl + "/student";
+  try {
+    const response = await fetch(uri, {
+      method: "GET",
+    });
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getStudentByBatchAndDepartment = async (batch, department) => {
+  const uri = baseUrl + `/student?year=${batch}&department=${department}`;
+  try {
+    const response = await fetch(uri, {
+      method: "GET",
+    });
+    const responseData = await response.json();
+    console.log(responseData);
+    return responseData;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export {
+  importStudentDetails,
+  summary,
+  getLastYearStudent,
+  getStudentByBatchAndDepartment,
+};

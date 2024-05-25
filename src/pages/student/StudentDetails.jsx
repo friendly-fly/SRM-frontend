@@ -3,16 +3,20 @@ import { CiEdit } from "react-icons/ci";
 import { IoIosCloudDone } from "react-icons/io";
 import { FaRupeeSign } from "react-icons/fa";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
+import { useLocation } from "react-router-dom";
 
 const NAVIGATION_DATA = [
   "Personal Details",
-  "Academic Details",
+  // "Academic Details",
   "Finance Details",
-  "Documents",
+  // "Documents",
 ];
 
 const StudentDetails = () => {
   const [navigationTab, setNavigationTab] = useState(NAVIGATION_DATA[0]);
+  const location = useLocation();
+  const { studentDetails } = location.state || {};
+
   return (
     <div className="px-10 py-2">
       <div className="max-width-[1000px]">
@@ -36,16 +40,18 @@ const StudentDetails = () => {
         </div>
 
         {/* personal Details */}
-        {NAVIGATION_DATA[0] === navigationTab && <PersonalDetails />}
+        {NAVIGATION_DATA[0] === navigationTab && (
+          <PersonalDetails studentDetails={Object.entries(studentDetails)} />
+        )}
 
         {/* academic Details */}
-        {NAVIGATION_DATA[1] === navigationTab && <AcademicDetails />}
+        {/* {NAVIGATION_DATA[1] === navigationTab && <AcademicDetails />} */}
 
         {/* finance Details */}
-        {NAVIGATION_DATA[2] === navigationTab && <FinanceDetails />}
+        {NAVIGATION_DATA[1] === navigationTab && <FinanceDetails />}
 
         {/* Documents Details */}
-        {NAVIGATION_DATA[3] === navigationTab && <Documents />}
+        {/* {NAVIGATION_DATA[3] === navigationTab && <Documents />} */}
       </div>
     </div>
   );
@@ -432,7 +438,7 @@ const Documents = () => {
   );
 };
 
-const PersonalDetails = () => {
+const PersonalDetails = ({ studentDetails }) => {
   return (
     <div>
       <div className="border">
@@ -444,36 +450,35 @@ const PersonalDetails = () => {
 
       {/* details */}
       <div className=" my-2 grid grid-cols-3 gap-4 text-xl p-3">
-        <div className="text-slate-500  flex gap-2 items-center">
-          <label className="font-bold">{"Name"} :</label>
-          <p className="font-semibold">{"Manish Kumar"}</p>
-        </div>
-
-        <div className="text-slate-500  flex gap-2 items-center">
-          <label className="font-bold">{"Name"} :</label>
-          <p className="font-semibold">{"Manish Kumar"}</p>
-        </div>
-
-        <div className="text-slate-500  flex gap-2 items-center">
-          <label className="font-bold">{"Name"} :</label>
-          <p className="font-semibold">{"Manish Kumar"}</p>
-        </div>
-
-        <div className="text-slate-500  flex gap-2 items-center">
-          <label className="font-bold">{"Name"} :</label>
-          <p className="font-semibold">{"Manish Kumar"}</p>
-        </div>
-
-        <div className="text-slate-500  flex gap-2 items-center">
-          <label className="font-bold">{"Name"} :</label>
-          <p className="font-semibold">{"Manish Kumar"}</p>
-        </div>
-
-        <div className="text-slate-500  flex gap-2 items-center">
-          <label className="font-bold">{"Name"} :</label>
-          <p className="font-semibold">{"Manish Kumar"}</p>
-        </div>
+        {studentDetails.map((data, idx) => {
+          return <StudentDataField key={idx} label={data[0]} value={data[1]} />;
+        })}
       </div>
+    </div>
+  );
+};
+
+const StudentDataField = ({ label, value }) => {
+  function capitalizeAndSpace(str) {
+    // Capitalize the first letter of the string
+    const capitalizedFirst = str.charAt(0).toUpperCase() + str.slice(1);
+
+    // Add a space before each uppercase letter, except the first one
+    const result = capitalizedFirst.replace(/([A-Z])/g, " $1").trim();
+
+    return result;
+  }
+
+  const labelName = capitalizeAndSpace(label);
+
+  if (label === "_id" || label === "__v") return;
+
+  return (
+    <div className="flex gap-2 items-center">
+      <label className="text-lg font-semibold text-slate-600">
+        {labelName} :
+      </label>
+      <p className="text-md  text-slate-500">{value}</p>
     </div>
   );
 };

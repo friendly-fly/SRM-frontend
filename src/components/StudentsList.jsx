@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const StudentsList = () => {
+const StudentsList = (data) => {
   const location = useLocation();
   const currentURL = location.pathname;
-  console.log(currentURL);
+  const [universityRoll, setUniversityRoll] = useState();
+  const [studentsData, setStudentsData] = useState([]);
+  useEffect(() => {
+    setStudentsData(data?.studentsData);
+  }, [data]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Clicked");
+    // alert(universityRoll);
+    const filterData = filterStudentByUniversityRoll(
+      data?.studentsData,
+      universityRoll
+    );
+    setStudentsData(filterData);
+  };
+
+  const filterStudentByUniversityRoll = (students, rollNumber) => {
+    console.log("hlw");
+    return students.filter((filterData) => {
+      return filterData.rollNo === parseInt(rollNumber);
+    });
   };
 
   return (
@@ -24,7 +40,9 @@ const StudentsList = () => {
             <input
               className="pl-5 w-[400px] py-1 border-2 rounded-full rounded-r-none text-center"
               type="number"
-              placeholder="Registration Number"
+              placeholder="University Number"
+              value={universityRoll}
+              onChange={(e) => setUniversityRoll(e.target.value)}
             />
             <button
               type="submit"
@@ -52,41 +70,20 @@ const StudentsList = () => {
           {/* academic Data */}
 
           <div className="[&>*:nth-child(odd)]:bg-slate-100">
-            <DetailsContainer
-              regNum={"1234353456345"}
-              rollNum={11}
-              fullName={"Manish Gupt"}
-              mobileNum={6204977821}
-              address={"Hajipur, Vaishali, Bihar"}
-              due={2300}
-            />
-
-            <DetailsContainer
-              regNum={"1234353456345"}
-              rollNum={11}
-              fullName={"Manish Gupt"}
-              mobileNum={6204977821}
-              address={"Hajipur, Vaishali, Bihar"}
-              due={2300}
-            />
-
-            <DetailsContainer
-              regNum={"1234353456345"}
-              rollNum={11}
-              fullName={"Manish Gupt"}
-              mobileNum={6204977821}
-              address={"Hajipur, Vaishali, Bihar"}
-              due={2300}
-            />
-
-            <DetailsContainer
-              regNum={"1234353456345"}
-              rollNum={11}
-              fullName={"Manish Gupt"}
-              mobileNum={6204977821}
-              address={"Hajipur, Vaishali, Bihar"}
-              due={2300}
-            />
+            {studentsData?.map((student, idx) => {
+              return (
+                <DetailsContainer
+                  key={idx}
+                  regNum={student?.regNum ?? idx}
+                  rollNum={student?.rollNo ?? idx}
+                  fullName={student?.name ?? idx}
+                  mobileNum={student?.mobileNumber ?? idx}
+                  address={student?.address ?? idx}
+                  due={student?.due ?? idx}
+                  studentDetails={student}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
@@ -103,10 +100,16 @@ const DetailsContainer = ({
   mobileNum,
   address,
   due,
+  studentDetails,
 }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
-    <div className="grid grid-cols-10 text-center cursor-pointer hover:text-green-700 hover:font-bold" onClick={()=> navigate("/dashboard/student-details")}>
+    <div
+      className="grid grid-cols-10 text-center cursor-pointer hover:text-green-700 hover:font-bold"
+      onClick={() =>
+        navigate("/dashboard/student-details", { state: { studentDetails } })
+      }
+    >
       <p className="col-span-2 border py-2">{regNum}</p>
       <p className="border py-2 ">{rollNum}</p>
       <p className="col-span-2 border-r-2 border py-2">{fullName}</p>

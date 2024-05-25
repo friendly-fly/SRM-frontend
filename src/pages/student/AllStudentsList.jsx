@@ -1,7 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import StudentsList from "../../components/StudentsList";
+import { getLastYearStudent } from "../../utils/api";
+import { toast } from "react-toastify";
 
 const AllStudentsList = () => {
+  const [passingBatch, setPassingBatch] = useState();
+  const [department, setDepartment] = useState();
+  const [studentsData, setStudentsData] = useState([]);
+  // const [universityRoll, setUniversityRoll] = useState();
+
+  // console.log(universityRoll);
+
+  useEffect(() => {
+    getLastYearStudent()
+      .then((response) => response)
+      .then((responseData) => {
+        if (responseData.status) {
+          setStudentsData(responseData.students);
+        } else {
+          toast.warning("Something went wrong");
+        }
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     <div>
       <form className="py-3 shadow-inner flex items-center gap-6 justify-end pr-4">
@@ -10,7 +32,11 @@ const AllStudentsList = () => {
           <label className="font-nunito font-bold text-slate-600 text-md px-1">
             Passing Batch:
           </label>
-          <select className="border-2 shadow-sm text-md font-bold font-nunito text-slate-600 px-2 py-1 rounded-lg cursor-pointer">
+          <select
+            className="border-2 shadow-sm text-md font-bold font-nunito text-slate-600 px-2 py-1 rounded-lg cursor-pointer"
+            value={passingBatch}
+            onChange={(e) => setPassingBatch(e.target.value)}
+          >
             <option>***select-option***</option>
             <option>2020</option>
             <option>2021</option>
@@ -26,26 +52,16 @@ const AllStudentsList = () => {
           <label className="font-nunito font-bold text-slate-600 text-md px-1">
             Department:
           </label>
-          <select className="border-2 shadow-sm text-md font-bold font-nunito text-slate-600 px-2 py-1 rounded-lg cursor-pointer">
+          <select
+            className="border-2 shadow-sm text-md font-bold font-nunito text-slate-600 px-2 py-1 rounded-lg cursor-pointer"
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
+          >
             <option>***select-option***</option>
             <option>CSE</option>
             <option>ECE</option>
             <option>EE</option>
             <option>CE</option>
-          </select>
-        </div>
-
-        {/* university select */}
-        <div className="flex gap-2 items-center">
-          <label className="font-nunito font-bold text-slate-600 text-md px-1">
-            University Roll:
-          </label>
-          <select className="border-2 shadow-sm text-md font-bold font-nunito text-slate-600 px-2 py-1 rounded-lg cursor-pointer">
-            <option>***select-option***</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
           </select>
         </div>
 
@@ -56,10 +72,7 @@ const AllStudentsList = () => {
           Filter
         </button>
       </form>
-      <StudentsList />
-      <StudentsList />
-      <StudentsList />
-      <StudentsList />
+      <StudentsList studentsData={studentsData} />
       <StudentsList />
     </div>
   );
