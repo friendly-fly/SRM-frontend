@@ -18,4 +18,17 @@ const importStudentDetails = async (file) => {
   }
 };
 
-export { importStudentDetails };
+const summary = async () => {
+  const uri = baseUrl + "/student/summary";
+  try {
+    const response = await fetch(uri, {
+      method: "GET",
+    });
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { importStudentDetails, summary };
