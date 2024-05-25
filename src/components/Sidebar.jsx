@@ -14,6 +14,10 @@ const Sidebar = () => {
 
   useEffect(() => {
     const activeNav = convertPathNameToOriginalName(pathname);
+    if (activeNav === "Student Details") {
+      setMenu("All Student Details");
+      return;
+    }
     setMenu(activeNav);
   }, [pathname]);
 
