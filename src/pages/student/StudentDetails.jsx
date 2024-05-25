@@ -4,6 +4,7 @@ import { IoIosCloudDone } from "react-icons/io";
 import { FaRupeeSign } from "react-icons/fa";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const NAVIGATION_DATA = [
   "Personal Details",
@@ -41,7 +42,11 @@ const StudentDetails = () => {
 
         {/* personal Details */}
         {NAVIGATION_DATA[0] === navigationTab && (
-          <PersonalDetails studentDetails={Object.entries(studentDetails)} />
+          <PersonalDetails
+            name={studentDetails?.name}
+            // avatar={"https://avatars.githubusercontent.com/u/89635138?v=4"}
+            studentDetails={Object.entries(studentDetails)}
+          />
         )}
 
         {/* academic Details */}
@@ -438,14 +443,34 @@ const Documents = () => {
   );
 };
 
-const PersonalDetails = ({ studentDetails }) => {
+const PersonalDetails = ({ studentDetails, name, avatar }) => {
+  const changeStudentDetails = () => {
+    toast.warning("This feature is not implemented yet");
+  };
   return (
     <div>
-      <div className="border">
-        <img
-          src="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=1024x1024&w=is&k=20&c=Bs1RdueQnaAcO888WBIQsC6NvA7aVTzeRVzSd8sJfUg="
-          className="max-h-60 w-full object-cover"
-        />
+      <div className=" shadow-md p-4 flex flex-row justify-between pl-5 bg-slate-50">
+        <div>
+          <div className="w-32 h-32 rounded-full shadow-md overflow-hidden">
+            <img
+              src={
+                avatar ??
+                "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"
+              }
+              className="h-full w-full object-center"
+            />
+          </div>
+          <p className="text-slate-500 text-3xl font-semibold">{name}</p>
+        </div>
+
+        <div className="flex items-center">
+          <button
+            onClick={changeStudentDetails}
+            className="inline px-5 py-2 rounded-lg bg-yellow-500 text-white font-nunito font-bold cursor-pointer hover:scale-110 hover:bg-green-500 duration-700"
+          >
+            Edit Data
+          </button>
+        </div>
       </div>
 
       {/* details */}
@@ -471,10 +496,30 @@ const StudentDataField = ({ label, value }) => {
 
   const labelName = capitalizeAndSpace(label);
 
-  if (label === "_id" || label === "__v") return;
+  if (label === "_id" || label === "__v" || label === "name") return;
+
+  if (label === "hosteler") {
+    value = value === true ? "True" : "False";
+  }
+
+  if (label === "isActive") {
+    value = value === true ? "True" : "False";
+  }
+
+  if (label === "isDropout") {
+    value = value === true ? "True" : "False";
+  }
+
+  if (label === "isGraduated") {
+    value = value === true ? "True" : "False";
+  }
+
+  if (label === "isLateral") {
+    value = value === true ? "True" : "False";
+  }
 
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex gap-8 items-center shadow-md px-4 py-3 rounded-lg">
       <label className="text-lg font-semibold text-slate-600">
         {labelName} :
       </label>
