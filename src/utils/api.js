@@ -18,6 +18,24 @@ const importStudentDetails = async (file) => {
   }
 };
 
+const registerStudent = async (formData) => {
+  console.log(formData);
+  const uri = baseUrl + "/student";
+  try {
+    const response = await fetch(uri, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const summary = async () => {
   const uri = baseUrl + "/student/summary";
   try {
@@ -64,4 +82,5 @@ export {
   summary,
   getLastYearStudent,
   getStudentByBatchAndDepartment,
+  registerStudent,
 };
