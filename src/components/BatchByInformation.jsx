@@ -18,7 +18,7 @@ const BatchByInformation = ({ data }) => {
         <p className="flex  items-center gap-1">
           {" "}
           <PiStudentBold />
-          CS: {data?.departments?.CS}
+          CE: {data?.departments?.CE}
         </p>
         <p className="flex  items-center gap-1">
           {" "}
