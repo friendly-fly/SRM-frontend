@@ -3,7 +3,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import heroLink from "../assets/hero.png";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   // const [isPasswordVisible, setPasswordVisible] = useState(false);
@@ -98,6 +98,13 @@ const LoginForm = () => {
             className="bg-green-500 px-4 py-2 text-xl rounded-md font-bold text-white cursor-pointer hover:bg-green-600 "
           />
         </div>
+
+        <Link
+          className="mx-auto text-blue-700 hover:scale-110"
+          to={"/register"}
+        >
+          Register
+        </Link>
       </form>
     </div>
   );
