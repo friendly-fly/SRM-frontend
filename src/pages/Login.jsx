@@ -6,17 +6,17 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [isPasswordVisible, setPasswordVisible] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [isPasswordVisible, setPasswordVisible] = useState(false);
+  // const [userName, setUserName] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [loading, setLoading] = useState(false);
 
   return (
     <>
       <Header />
       <div className=" flex">
         {/* left section*/}
-        <div className="basis-3/5 py-32 flex justify-center">
+        <div className="basis-3/5 flex justify-center items-center">
           <LoginForm />
         </div>
 
@@ -37,20 +37,25 @@ const LoginForm = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   //handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    const confirm = window.confirm("You want to preview DASHBOARD.")
-    if(confirm) {
-      navigate("/dashboard")
+    const confirm = window.confirm("You want to preview DASHBOARD.");
+    if (confirm) {
+      navigate("/dashboard");
     }
   };
   return (
     <div className="border border-slate-500 text-white  rounded-lg sm:p-8 mt-5">
-      <h1 className="text-center text-4xl font-dmsans font-bold text-slate-500">Login</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-7 text-slate-600">
+      <h1 className="text-center text-4xl font-dmsans font-bold text-slate-500">
+        Login
+      </h1>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 mt-7 text-slate-600"
+      >
         <div>
           <label className="font-semi-bold "> User Name</label>
           <br />
