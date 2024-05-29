@@ -1,29 +1,81 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { registerStudent } from "../../utils/api";
 
 const AdmissionForm = () => {
-    const [name , setName] = useState("")
-    const [fathersName , setFathersName] = useState("")
-    const [mothersName , setMothersName] = useState("")
-    const [guardianName , setGuardianName] = useState("")
-    const [guardianMobileNumber , setGuardianMobileNumber] = useState("")
-    const [mobileNumber , setMobileNumber] = useState("")
-    const [address , setAddress] = useState("")
-    const [state , setState] = useState("")
-    const [pincode , setPincode] = useState("")
-    const [tenthPercentage , settenthPercentage] = useState("")
-    const [twelvePercentage , settwelvePercentage] = useState("")
-    const [diplomaCGPA , setDiplomaCGPA] = useState("")
-    const [image , setImage] = useState("")
-    const [tenthMarkSheet , settenthMarkSheet] = useState("")
-    const [twelveMarkSheet , setTwelveMarkSheet] = useState("")
-    const [diplomaMarkSheet , setDiplomaMarkSheet] = useState("")
+  const [name, setName] = useState("");
+  const [fathersName, setFathersName] = useState("");
+  const [mothersName, setMothersName] = useState("");
+  const [guardianName, setGuardianName] = useState("");
+  const [guardianMobileNumber, setGuardianMobileNumber] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [state, setState] = useState("");
+  const [pinCode, setPinCode] = useState("");
+  const [tenthPercentage, settenthPercentage] = useState("");
+  const [twelvePercentage, settwelvePercentage] = useState("");
+  const [diplomaCGPA, setDiplomaCGPA] = useState("");
+  const [hosteler, setHosteler] = useState("");
+  const [department, setDepartment] = useState("");
+  const [regular, setRegular] = useState("");
+  const [gender, setGender] = useState("");
 
-
-    //handle submit
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        alert("Clicked sucessfully")
+  //handle submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (
+      [
+        name,
+        fathersName,
+        mothersName,
+        guardianName,
+        mobileNumber,
+        guardianMobileNumber,
+        address,
+        state,
+        pinCode,
+        tenthPercentage,
+        hosteler,
+        department,
+        regular,
+        gender,
+      ].some((value) => value.trim() === "")
+    ) {
+      toast.warning("All mandatory fields required");
+      return;
     }
+
+    const formData = {
+      name,
+      gender,
+      mobileNumber,
+      guardianName,
+      guardianMobileNumber,
+      fathersName,
+      mothersName,
+      address,
+      state,
+      pinCode,
+      tenthPercentage,
+      twelfthPercentage: twelvePercentage,
+      diplomaCGPA,
+      hosteler: hosteler === "Yes" ? true : false,
+      department,
+      isLateral: regular === "Yes" ? false : true,
+      year: new Date().getFullYear() + 4,
+    };
+
+    console.log(formData);
+
+    const response = await registerStudent(formData);
+    if (response.status) {
+      toast.success("Student register sucessfully");
+      return;
+    } else {
+      toast.error("something went wrong.");
+      return;
+    }
+  };
   return (
     <div className="px-10 py-5">
       <div className="m-2 mb-4">
@@ -33,28 +85,155 @@ const AdmissionForm = () => {
         <div className="w-52 bg-cyan-500 h-[1.5px] mt-2 rounded-lg text-center"></div>
       </div>
       <form onSubmit={handleSubmit} className="grid gap-5">
-        <InputField labelName={"Name"} fieldValue={name} onChangeHandler={setName}/>
-        <InputField labelName={"Father's Name"} fieldValue={fathersName} onChangeHandler={setFathersName}/>
-        <InputField labelName={"Mother's Name"} fieldValue={mothersName} onChangeHandler={setMothersName}/>
-        <InputField labelName={"Guardian Name"} fieldValue={guardianName} onChangeHandler={setGuardianName}/>
-        <InputField labelName={"Guardian Mobile Number"} inputType="number" fieldValue={guardianMobileNumber} onChangeHandler={setGuardianMobileNumber}/>
-        <InputField labelName={"Mobile Number"} inputType="number" fieldValue={mobileNumber} onChangeHandler={setMobileNumber}/>
-        <InputField labelName={"Address"} fieldValue={address} onChangeHandler={setAddress}/>
-        <InputField labelName={"State"} fieldValue={state} onChangeHandler={setState}/>
-        <InputField labelName={"Pincode"} inputType="number" fieldValue={pincode} onChangeHandler={setPincode}/>
-        <InputField labelName={"10th%"} fieldValue={tenthPercentage} inputType="number"/>
-        <InputField labelName={"12th%"} require={false}  fieldValue={twelvePercentage} onChangeHandler={settwelvePercentage}/>
-        <InputField labelName={"Diploma CGPA"} require={false} inputType="number" fieldValue={diplomaCGPA} onChangeHandler={setDiplomaCGPA}/>
-        <FileInputField labelName={"Image"} onChangeHandler={setImage}/>
-        <FileInputField labelName={"10th Mark Sheet"} onChangeHandler={settenthMarkSheet}/>
-        <FileInputField labelName={"12th Mark Sheet"} require={false} onChangeHandler={settenthMarkSheet}/>
-        <FileInputField labelName={"Diploma Mark Sheet"} require={false} onChangeHandler={setDiplomaMarkSheet}/>
+        <InputField
+          labelName={"Name"}
+          fieldValue={name}
+          onChangeHandler={setName}
+        />
+        <InputField
+          labelName={"Father's Name"}
+          fieldValue={fathersName}
+          onChangeHandler={setFathersName}
+        />
+        <InputField
+          labelName={"Mother's Name"}
+          fieldValue={mothersName}
+          onChangeHandler={setMothersName}
+        />
+        <InputField
+          labelName={"Guardian Name"}
+          fieldValue={guardianName}
+          onChangeHandler={setGuardianName}
+        />
+        <InputField
+          labelName={"Guardian Mobile Number"}
+          inputType="number"
+          fieldValue={guardianMobileNumber}
+          onChangeHandler={setGuardianMobileNumber}
+        />
+        <InputField
+          labelName={"Mobile Number"}
+          inputType="number"
+          fieldValue={mobileNumber}
+          onChangeHandler={setMobileNumber}
+        />
+        <InputField
+          labelName={"Address"}
+          fieldValue={address}
+          onChangeHandler={setAddress}
+        />
+        <InputField
+          labelName={"State"}
+          fieldValue={state}
+          onChangeHandler={setState}
+        />
+        <InputField
+          labelName={"Pincode"}
+          inputType="number"
+          fieldValue={pinCode}
+          onChangeHandler={setPinCode}
+        />
+        <InputField
+          labelName={"10th%"}
+          fieldValue={tenthPercentage}
+          onChangeHandler={settenthPercentage}
+          inputType="number"
+        />
+        <InputField
+          labelName={"12th%"}
+          require={false}
+          fieldValue={twelvePercentage}
+          onChangeHandler={settwelvePercentage}
+        />
+        <InputField
+          labelName={"Diploma CGPA"}
+          require={false}
+          inputType="number"
+          fieldValue={diplomaCGPA}
+          onChangeHandler={setDiplomaCGPA}
+        />
+        <InputField
+          labelName={"Total Fees"}
+          require={true}
+          inputType="number"
+          fieldValue={diplomaCGPA}
+          onChangeHandler={setDiplomaCGPA}
+        />
 
-
-        <div className="col-span-3 text-center ">
-            <input type="submit" value={"Apply"} className="px-5 py-2 rounded-lg bg-yellow-500 text-white  font-nunito font-bold cursor-pointer hover:scale-110 hover:bg-green-500 duration-700"  />
+        {/* Gender select */}
+        <div>
+          <label className="font-semi-bold">{"Gender"}</label>
+          <span className="text-red-600 font-bold ">*</span>
+          <br />
+          <select
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+            className="rounded-md px-2 py-2 text-xl font-semibold mt-2 border border-slate-700 w-80 text-center"
+          >
+            <option>***SELECT-OPTION***</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
         </div>
 
+        {/* Hosteler select */}
+        <div>
+          <label className="font-semi-bold">{"Hosteler"}</label>
+          <span className="text-red-600 font-bold ">*</span>
+          <br />
+          <select
+            value={hosteler}
+            onChange={(e) => setHosteler(e.target.value)}
+            className="rounded-md px-2 py-2 text-xl font-semibold mt-2 border border-slate-700 w-80 text-center"
+          >
+            <option>***SELECT-OPTION***</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+
+        {/* Department select */}
+        <div>
+          <label className="font-semi-bold">{"Department"}</label>
+          <span className="text-red-600 font-bold ">*</span>
+          <br />
+          <select
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
+            className="rounded-md px-2 py-2 text-xl font-semibold mt-2 border border-slate-700 w-80 text-center"
+          >
+            <option>***SELECT-OPTION***</option>
+            <option>CSE</option>
+            <option>ECE</option>
+            <option>EE</option>
+            <option>CE</option>
+          </select>
+        </div>
+
+        {/* Regular select*/}
+        <div>
+          <label className="font-semi-bold">{"Regular"}</label>
+          <span className="text-red-600 font-bold ">*</span>
+          <br />
+          <select
+            value={regular}
+            onChange={(e) => setRegular(e.target.value)}
+            className="rounded-md px-2 py-2 text-xl font-semibold mt-2 border border-slate-700 w-80 text-center"
+          >
+            <option>***SELECT-OPTION***</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+
+        <div className="col-span-3 text-center ">
+          <input
+            type="submit"
+            value={"Apply"}
+            className="px-5 py-2 rounded-lg bg-yellow-500 text-white  font-nunito font-bold cursor-pointer hover:scale-110 hover:bg-green-500 duration-700"
+          />
+        </div>
       </form>
     </div>
   );
