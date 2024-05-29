@@ -19,6 +19,27 @@ const AdmissionForm = () => {
   const [department, setDepartment] = useState("");
   const [regular, setRegular] = useState("");
   const [gender, setGender] = useState("");
+  const [fees, setFees] = useState(0);
+
+  const clearData = () => {
+    setName("");
+    setFathersName("");
+    setMothersName("");
+    setGuardianName("");
+    setGuardianMobileNumber("");
+    setMobileNumber("");
+    setAddress("");
+    setState("");
+    setPinCode("");
+    settwelvePercentage("");
+    settenthPercentage("");
+    setDiplomaCGPA("");
+    setHosteler("");
+    setDepartment("");
+    setRegular("");
+    setGender("");
+    setFees(0);
+  };
 
   //handle submit
   const handleSubmit = async (e) => {
@@ -39,6 +60,7 @@ const AdmissionForm = () => {
         department,
         regular,
         gender,
+        fees,
       ].some((value) => value.trim() === "")
     ) {
       toast.warning("All mandatory fields required");
@@ -62,14 +84,14 @@ const AdmissionForm = () => {
       hosteler: hosteler === "Yes" ? true : false,
       department,
       isLateral: regular === "Yes" ? false : true,
-      year: new Date().getFullYear() + 4,
+      year: new Date().getFullYear(),
+      totalPayableFee: fees,
     };
-
-    console.log(formData);
 
     const response = await registerStudent(formData);
     if (response.status) {
       toast.success("Student register sucessfully");
+      clearData();
       return;
     } else {
       toast.error("something went wrong.");
@@ -156,8 +178,8 @@ const AdmissionForm = () => {
           labelName={"Total Fees"}
           require={true}
           inputType="number"
-          fieldValue={diplomaCGPA}
-          onChangeHandler={setDiplomaCGPA}
+          fieldValue={fees}
+          onChangeHandler={setFees}
         />
 
         {/* Gender select */}

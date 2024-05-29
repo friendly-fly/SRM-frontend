@@ -35,6 +35,42 @@ const registerStudent = async (formData) => {
     console.log(error);
   }
 };
+const updateStudent = async (formData, id) => {
+  console.log(formData);
+  const uri = baseUrl + `/student/${id}`;
+  try {
+    const response = await fetch(uri, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+    const responseData = await response.json();
+    console.log(responseData);
+    return responseData;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const feePayment = async (formData) => {
+  const uri = baseUrl + `/payment/add`;
+  try {
+    const response = await fetch(uri, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+    const responseData = await response.json();
+    console.log(responseData);
+    return responseData;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const summary = async () => {
   const uri = baseUrl + "/student/summary";
@@ -83,4 +119,6 @@ export {
   getLastYearStudent,
   getStudentByBatchAndDepartment,
   registerStudent,
+  updateStudent,
+  feePayment,
 };

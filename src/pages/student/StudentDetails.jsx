@@ -5,6 +5,7 @@ import { FaRupeeSign } from "react-icons/fa";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loading from "../../components/Loading";
 
 const NAVIGATION_DATA = [
   "Personal Details",
@@ -54,7 +55,14 @@ const StudentDetails = () => {
         {/* {NAVIGATION_DATA[1] === navigationTab && <AcademicDetails />} */}
 
         {/* finance Details */}
-        {NAVIGATION_DATA[1] === navigationTab && <FinanceDetails />}
+        {NAVIGATION_DATA[1] === navigationTab && (
+          <FinanceDetails
+            totalPayableFee={studentDetails?.totalPayableFee}
+            paid={studentDetails?.payment}
+            year={studentDetails?.year}
+            studentDetails={studentDetails}
+          />
+        )}
 
         {/* Documents Details */}
         {/* {NAVIGATION_DATA[3] === navigationTab && <Documents />} */}
@@ -64,69 +72,6 @@ const StudentDetails = () => {
 };
 
 export default StudentDetails;
-
-// const PersonalDetails = () => {
-//   return (
-//     <div className="border px-8">
-//       {/* avatar img container*/}
-//       <div className="rounded-md mt-2">
-//         <img
-//           className="max-h-32 rounded-full object-contain"
-//           src="https://i.pinimg.com/564x/4e/09/49/4e09490e358cde38862495e8292621c1.jpg"
-//           alt="avatar-img"
-//         />
-//       </div>
-
-//       {/* prsonal details */}
-//       <div className="grid grid-cols-2 gap-3 my-3">
-//         <DetailsFieldPreviewerOrEditor
-//           title={"Name"}
-//           titleContent={"Manish Kumar"}
-//         />
-//         <DetailsFieldPreviewerOrEditor
-//           title={"Father's Name"}
-//           titleContent={"Sanjay Kumar Gupta"}
-//         />
-//         <DetailsFieldPreviewerOrEditor
-//           title={"Mother's Name"}
-//           titleContent={"Rita Devi"}
-//         />
-//         <DetailsFieldPreviewerOrEditor
-//           title={"Guardian Name"}
-//           titleContent={"Sanjay Kumar Gupta"}
-//         />
-//         <DetailsFieldPreviewerOrEditor
-//           title={"Guardian Mobile Number"}
-//           titleContent={"6204977821"}
-//         />
-//         <DetailsFieldPreviewerOrEditor
-//           title={"Mobile Number"}
-//           titleContent={"7479863918"}
-//         />
-//         <DetailsFieldPreviewerOrEditor
-//           title={"Address"}
-//           titleContent={"Daulatpur Devairy Hajipur Vaishali"}
-//         />
-//         <DetailsFieldPreviewerOrEditor title={"State"} titleContent={"Bihar"} />
-//         <DetailsFieldPreviewerOrEditor
-//           title={"PinCode"}
-//           titleContent={"844102"}
-//         />
-//         <DetailsFieldPreviewerOrEditor title={"10th%"} titleContent={"61.6"} />
-//         <DetailsFieldPreviewerOrEditor title={"12th%"} titleContent={"74"} />
-//         <DetailsFieldPreviewerOrEditor
-//           title={"Diploma CGPA"}
-//           titleContent={"9.54"}
-//         />
-//         <DetailsFieldPreviewerOrEditor
-//           title={"Hosteler"}
-//           titleContent={"Yes"}
-//         />
-//         <DetailsFieldPreviewerOrEditor title={"Gender"} titleContent={"Male"} />
-//       </div>
-//     </div>
-//   );
-// };
 
 const DetailsFieldPreviewerOrEditor = ({ title, titleContent }) => {
   const [isEditable, setIsEditable] = useState(false);
@@ -362,14 +307,24 @@ const AcademicDetails = () => {
   );
 };
 
-const FinanceDetails = () => {
-  const FeeData = () => {
+const FinanceDetails = ({ totalPayableFee, paid, year, studentDetails }) => {
+  const FeeData = ({ data, semester, feePerSemester }) => {
     return (
-      <div className="grid grid-cols-6 text-center bg-green-300 overflow-hidden">
-        <p className="border py-2">1st</p>
-        <p className="col-span-2 border py-2">33000</p>
-        <p className="col-span-2 border py-2">6000</p>
-        <p className=" border py-2">6000</p>
+      <div
+        className={`grid grid-cols-6 text-center bg-green-300 overflow-hidden `}
+      >
+        <p className={`border py-2 ${data > 6000 && "bg-red-400"}`}>
+          {semester}
+        </p>
+        <p className={`col-span-2 border py-2 ${data > 6000 && "bg-red-400"}`}>
+          {feePerSemester - (studentDetails?.hosteler ? 6000 : 0)}
+        </p>
+        <p className={`col-span-2 border py-2 ${data !== 0 && "bg-red-400"}`}>
+          {studentDetails?.hosteler ? 6000 : 0}
+        </p>
+        <p className={` border py-2 ${data != 0 && "bg-red-400"}`}>
+          {data > 0 ? data : 0}
+        </p>
       </div>
     );
   };
@@ -379,11 +334,38 @@ const FinanceDetails = () => {
       <div className="grid grid-cols-6 text-center ">
         <p className=" border py-2">Semester</p>
         <p className="col-span-2 border py-2">Academic Fees</p>
-        <p className="col-span-2 border py-2">Hostel Fees</p>
+        <p className=" col-span-2 border py-2 ">Hostel Fees</p>
         <p className=" border py-2">Due</p>
       </div>
     );
   };
+
+  // const feesArray = new Array();
+  const currentYear = parseInt(new Date().getFullYear()) - parseInt(year) + 1;
+  const currentSemester = currentYear * 2 - (new Date().getMonth() > 6 ? 0 : 1);
+
+  const feeArray = new Array(currentSemester);
+  let feePerSemester;
+
+  if (studentDetails?.isLateral) {
+    feePerSemester = totalPayableFee / 6;
+  } else {
+    feePerSemester = totalPayableFee / 8;
+  }
+
+  console.log(feePerSemester);
+
+  for (let i = 0; i < feeArray.length; i++) {
+    feeArray[i] =
+      paid - feePerSemester >= 0 ? 0 : Math.abs(paid - feePerSemester);
+    paid -= feePerSemester;
+    if (paid < 0) {
+      paid = 0;
+    }
+  }
+
+  const totalDue = feePerSemester * currentSemester - studentDetails?.payment;
+
   return (
     <div className="border-2 p-4 rounded-md">
       <h1 className="text-lg bg-cyan-300 px-3 py-1 rounded-md text-slate-500 font-semibold font-nunito">
@@ -391,11 +373,16 @@ const FinanceDetails = () => {
       </h1>
       <div className="mb-6 font-nunito">
         <FeeDataHeading />
-        <FeeData />
-        <FeeData />
-        <FeeData />
-        <FeeData />
-        <FeeData />
+        {feeArray.map((data, idx) => {
+          return (
+            <FeeData
+              key={idx}
+              data={data}
+              semester={idx + 1}
+              feePerSemester={feePerSemester}
+            />
+          );
+        })}
 
         {/* due section */}
         <div className="grid grid-cols-6 text-cente bg-yellow-200 text-center text-xl">
@@ -403,7 +390,7 @@ const FinanceDetails = () => {
             Due Amount
           </p>
           <p className=" border py-2 font-bold text-slate-600 flex items-center justify-center gap-1">
-            <FaRupeeSign /> 45000
+            <FaRupeeSign /> {totalDue}
           </p>
         </div>
       </div>
@@ -462,7 +449,7 @@ const PersonalDetails = ({ studentDetails, name, avatar, details }) => {
                 avatar ??
                 "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"
               }
-              className="h-full w-full object-center"
+              className="h-full w-full object-cover"
             />
           </div>
           <p className="text-slate-500 text-3xl font-semibold">{name}</p>
@@ -533,10 +520,13 @@ const StudentDataField = ({ label, value }) => {
   );
 };
 
+import { registerStudent, updateStudent } from "../../utils/api";
+import { current } from "@reduxjs/toolkit";
+
 const EditStudentDetails = ({ studentDetails }) => {
   const [name, setName] = useState(studentDetails?.name);
   const [fathersName, setFathersName] = useState(studentDetails?.fathersName);
-  const [mothersName, setMothersName] = useState(studentDetails?.mothersName);
+  const [mothersName, setMothersName] = useState(studentDetails?.mobileNumber);
   const [guardianName, setGuardianName] = useState(
     studentDetails?.guardianName
   );
@@ -548,26 +538,130 @@ const EditStudentDetails = ({ studentDetails }) => {
   );
   const [address, setAddress] = useState(studentDetails?.address);
   const [state, setState] = useState(studentDetails?.state);
-  const [pincode, setPincode] = useState(studentDetails?.pinCode);
+  const [pinCode, setPinCode] = useState(studentDetails?.pinCode);
   const [tenthPercentage, settenthPercentage] = useState(
     studentDetails?.tenthPercentage
   );
   const [twelvePercentage, settwelvePercentage] = useState(
-    studentDetails?.twelfthPercentage
+    studentDetails?.twelvePercentage
   );
   const [diplomaCGPA, setDiplomaCGPA] = useState(studentDetails?.diplomaCGPA);
-  const [image, setImage] = useState("");
+  const [hosteler, setHosteler] = useState(
+    studentDetails?.hosteler ? "Yes" : "No"
+  );
+  const [department, setDepartment] = useState(studentDetails?.department);
+  const [regular, setRegular] = useState(
+    studentDetails?.isLateral ? "No" : "Yes"
+  );
+  const [gender, setGender] = useState(studentDetails?.gender);
+  const [fees, setFees] = useState(studentDetails?.totalPayableFee);
+  const [avatar, setAvatar] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const uploadImage = async (file) => {
+    const formData = new FormData();
+    formData.set("file", file);
+
+    try {
+      const response = await fetch(
+        "https://github-bucket-backend.onrender.com/api/v1/file/upload",
+        {
+          method: "POST",
+          headers: {
+            authorization:
+              "token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1yaW5qYW11bCIsInNjb3BlcyI6WyJmaWxlOnJlYWQiLCJmaWxlOndyaXRlIl0sImlhdCI6MTcxNjk4MjcxNCwiZXhwIjo0ODcyNzQyNzE0fQ.P_ELfA9OxhRyq3HSVLLoIEqdPiUQlC_vjpWMD8xciaI",
+          },
+          body: formData,
+        }
+      );
+
+      const responseData = await response.json();
+      return responseData;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   //handle submit
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Clicked sucessfully");
+    try {
+      setLoading(true);
+
+      if (
+        [
+          name,
+          fathersName,
+          mothersName,
+          guardianName,
+          mobileNumber,
+          guardianMobileNumber,
+          address,
+          state,
+          pinCode,
+          tenthPercentage,
+          hosteler,
+          department,
+          regular,
+          gender,
+        ].some((value) => value === null || value === undefined)
+      ) {
+        toast.warning("All mandatory fields required");
+        return;
+      }
+      let uploadedAvatar;
+      if (avatar) {
+        uploadedAvatar = await uploadImage(avatar);
+
+        if (uploadedAvatar.status) {
+          uploadedAvatar = uploadedAvatar?.data[0]?.url;
+          console.log(uploadedAvatar);
+        } else {
+          toast.error("Something went wrong");
+        }
+      }
+
+      const formData = {
+        name,
+        gender,
+        mobileNumber,
+        guardianName,
+        guardianMobileNumber,
+        fathersName,
+        mothersName,
+        address,
+        state,
+        pinCode,
+        tenthPercentage,
+        twelfthPercentage: twelvePercentage,
+        diplomaCGPA,
+        hosteler: hosteler === "Yes" ? true : false,
+        avatar: uploadedAvatar ?? uploadImage,
+        totalPayableFee: fees,
+        isLateral: regular === "Yes" ? false : true,
+      };
+
+      const response = await updateStudent(formData, studentDetails?._id);
+      if (response.status) {
+        toast.success("Student updaed sucessfully");
+        return;
+      } else {
+        toast.error("something went wrong.");
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
+
   return (
     <div className="px-10 py-5">
+      {loading && <Loading />}
       <div className="m-2 mb-4">
         <h1 className="text-4xl font-nunito font-extrabold text-slate-500">
-          Edit Student Details
+          Update Details
         </h1>
         <div className="w-52 bg-cyan-500 h-[1.5px] mt-2 rounded-lg text-center"></div>
       </div>
@@ -617,12 +711,13 @@ const EditStudentDetails = ({ studentDetails }) => {
         <InputField
           labelName={"Pincode"}
           inputType="number"
-          fieldValue={pincode}
-          onChangeHandler={setPincode}
+          fieldValue={pinCode}
+          onChangeHandler={setPinCode}
         />
         <InputField
           labelName={"10th%"}
           fieldValue={tenthPercentage}
+          onChangeHandler={settenthPercentage}
           inputType="number"
         />
         <InputField
@@ -638,12 +733,90 @@ const EditStudentDetails = ({ studentDetails }) => {
           fieldValue={diplomaCGPA}
           onChangeHandler={setDiplomaCGPA}
         />
-        <FileInputField labelName={"Image"} onChangeHandler={setImage} />
+        <InputField
+          labelName={"Total Fees"}
+          require={true}
+          inputType="number"
+          fieldValue={fees}
+          onChangeHandler={setFees}
+        />
+
+        <FileInputField
+          labelName={"Student Image"}
+          onChangeHandler={setAvatar}
+        />
+
+        {/* Gender select */}
+        <div>
+          <label className="font-semi-bold">{"Gender"}</label>
+          <span className="text-red-600 font-bold ">*</span>
+          <br />
+          <select
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+            className="rounded-md px-2 py-2 text-xl font-semibold mt-2 border border-slate-700 w-80 text-center"
+          >
+            <option>***SELECT-OPTION***</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        {/* Hosteler select */}
+        <div>
+          <label className="font-semi-bold">{"Hosteler"}</label>
+          <span className="text-red-600 font-bold ">*</span>
+          <br />
+          <select
+            value={hosteler}
+            onChange={(e) => setHosteler(e.target.value)}
+            className="rounded-md px-2 py-2 text-xl font-semibold mt-2 border border-slate-700 w-80 text-center"
+          >
+            <option>***SELECT-OPTION***</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+
+        {/* Department select */}
+        <div>
+          <label className="font-semi-bold">{"Department"}</label>
+          <span className="text-red-600 font-bold ">*</span>
+          <br />
+          <select
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
+            className="rounded-md px-2 py-2 text-xl font-semibold mt-2 border border-slate-700 w-80 text-center"
+          >
+            <option>***SELECT-OPTION***</option>
+            <option>CSE</option>
+            <option>ECE</option>
+            <option>EE</option>
+            <option>CE</option>
+          </select>
+        </div>
+
+        {/* Regular select*/}
+        <div>
+          <label className="font-semi-bold">{"Regular"}</label>
+          <span className="text-red-600 font-bold ">*</span>
+          <br />
+          <select
+            value={regular}
+            onChange={(e) => setRegular(e.target.value)}
+            className="rounded-md px-2 py-2 text-xl font-semibold mt-2 border border-slate-700 w-80 text-center"
+          >
+            <option>***SELECT-OPTION***</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
 
         <div className="col-span-3 text-center ">
           <input
             type="submit"
-            value={"Apply"}
+            value={"Update"}
             className="px-5 py-2 rounded-lg bg-yellow-500 text-white  font-nunito font-bold cursor-pointer hover:scale-110 hover:bg-green-500 duration-700"
           />
         </div>
