@@ -6,6 +6,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import Register from "./pages/Register";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/dashboard/*" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
