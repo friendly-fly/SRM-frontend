@@ -133,6 +133,19 @@ const getStudentByBatchDepartmentAndRollNumber = async (
   }
 };
 
+const getDueSummaryOfCurrentBatch = async () => {
+  const uri = baseUrl + `/payment/summary`;
+  try {
+    const response = await fetch(uri, {
+      method: "GET",
+    });
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export {
   importStudentDetails,
   summary,
@@ -142,4 +155,5 @@ export {
   updateStudent,
   feePayment,
   getStudentByBatchDepartmentAndRollNumber,
+  getDueSummaryOfCurrentBatch,
 };

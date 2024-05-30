@@ -654,6 +654,8 @@ const EditStudentDetails = ({ studentDetails, setEditStudentDetails }) => {
         avatar: uploadedAvatar ?? uploadImage,
         totalPayableFee: fees,
         isLateral: regular === "Yes" ? false : true,
+        rollNo: rollNo,
+        registrationNo: registrationNo,
       };
 
       const response = await updateStudent(formData, studentDetails?._id);

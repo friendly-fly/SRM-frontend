@@ -3,25 +3,6 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from "recharts";
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
 
-const data = [
-  {
-    name: "CSE",
-    uv: 280,
-  },
-  {
-    name: "ECE",
-    uv: 200,
-  },
-  {
-    name: "EE",
-    uv: 170,
-  },
-  {
-    name: "CE",
-    uv: 270,
-  },
-];
-
 const getPath = (x, y, width, height) => {
   return `M${x},${y + height}C${x + width / 3},${y + height} ${x + width / 2},${
     y + height / 3
@@ -39,10 +20,31 @@ const TriangleBar = (props) => {
   return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
 };
 
-export default function App() {
+export default function App({ dueData, batch }) {
+  console.log(dueData);
+  const data = [
+    {
+      name: "CSE",
+      uv: dueData?.CSE ?? 560000,
+    },
+    {
+      name: "ECE",
+      uv: dueData?.ECE ?? 760000,
+    },
+    {
+      name: "EE",
+      uv: dueData?.EE ?? 56000,
+    },
+    {
+      name: "CE",
+      uv: dueData?.CE ?? 12342,
+    },
+  ];
   return (
     <div className="p-3 shadow-md rounded-md">
-      <p className="font-bold text-lg text-slate-600 mb-2">Batch: 2024 Due</p>
+      <p className="font-bold text-lg text-slate-600 mb-2">
+        Batch: {batch} Due
+      </p>
 
       <BarChart
         width={500}

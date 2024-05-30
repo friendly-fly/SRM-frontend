@@ -101,13 +101,13 @@ const Sidebar = () => {
           />
         </div>
 
-        <LinkContainer
+        {/* <LinkContainer
           to={"/dashboard/report-analysis"}
           menu={menu}
           setMenu={setMenu}
           IconName={BiAnalyse}
           label={"Report Analysis"}
-        />
+        /> */}
       </div>
     </div>
   );

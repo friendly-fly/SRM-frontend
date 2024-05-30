@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import AdmissionForm from "../../pages/student/AdmissionForm";
 import StudentDetails from "../../pages/student/StudentDetails";
 import StudentsList from "../../components/StudentsList";
@@ -11,7 +11,7 @@ import BatchByInformation from "../../components/BatchByInformation";
 import DueFeePieChart from "../../components/DueFeePieChart";
 import StudentFeePayment from "../student/StudentFeePayment";
 import ImportStudentsDetailsUsingCSV from "../student/ImportStudentsDetailsUsingCSV";
-import { summary } from "../../utils/api";
+import { getDueSummaryOfCurrentBatch, summary } from "../../utils/api";
 import { toast } from "react-toastify";
 
 const Dashboard = () => {
@@ -24,8 +24,9 @@ const Dashboard = () => {
 };
 
 const Content = () => {
+  const navigate = useNavigate();
   const logout = () => {
-    alert("this feature is not implemented yet.");
+    navigate("/login");
   };
   return (
     <div className="flex-1 h-screen overflow-auto ">
@@ -55,6 +56,7 @@ const Content = () => {
 
 const DashboardContent = () => {
   const [data, setData] = useState([]);
+  const [dueData, setDueData] = useState({});
   useEffect(() => {
     summary()
       .then((response) => response)
@@ -67,6 +69,22 @@ const DashboardContent = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  useEffect(() => {
+    getDueSummaryOfCurrentBatch()
+      .then((response) => response)
+      .then((responseData) => {
+        if (responseData.status) {
+          console.log(responseData);
+          setDueData(responseData?.summary?.payableAmountPerYearAndDepartment);
+        } else {
+          toast.warning("Something went wrong");
+        }
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  console.log(data);
   return (
     <div className="">
       {/* student in the batch */}
@@ -79,10 +97,10 @@ const DashboardContent = () => {
       {/* due fees pie chart of each batch */}
 
       <div className="mt-2 grid grid-cols-2 justify-center items-center gap-6">
-        <DueFeePieChart />
-        <DueFeePieChart />
-        <DueFeePieChart />
-        <DueFeePieChart />
+        <DueFeePieChart dueData={dueData[2024]} batch={2024} />
+        <DueFeePieChart dueData={dueData[2023]} batch={2023} />
+        <DueFeePieChart dueData={dueData[2022]} batch={2022} />
+        <DueFeePieChart dueData={dueData[2021]} batch={2021} />
       </div>
     </div>
   );
