@@ -30,12 +30,12 @@ const ImportStudentsDetailsUsingCSV = () => {
   return (
     <div>
       {loading && <Loading />}
-      <h1 className="text-4xl font-nunito font-extrabold text-slate-500 m-3">
+      <h1 className="text-4xl font-nunito font-extrabold text-slate-500 m-3 text-center my-5">
         Import Students Details Using CSV File
       </h1>
 
       <div className="flex justify-center my-40">
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center  p-10 shadow-xl rounded-3xl">
           <div
             className="w-32 h-32 rounded-lg border-white border flex-col flex justify-center items-center cursor-pointer"
             onClick={() => inputFileRef.current.click()}
