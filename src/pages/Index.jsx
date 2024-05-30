@@ -24,18 +24,19 @@ const Index = () => {
           </h1>
 
           <p className="text-md font-nunito text-slate-600">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum
-            fuga, fugit dolorem dolorum aliquid impedit ea quibusdam sunt
-            laborum facere unde consequuntur dolores quae assumenda repellendus
-            rem similique recusandae reiciendis quia architecto vel iure tenetur
-            dicta. Natus atque ipsam veritatis.
+            The Student Management CRM application is meticulously designed to
+            streamline a wide array of administrative tasks associated with
+            student management. This innovative system offers a centralized
+            platform that simplifies the management of student records, and
+            financial transactions, ensuring an integrated and efficient
+            operational framework for educational institutions
           </p>
 
           {/* button */}
 
           <div className="">
             <button
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate("/login")}
               className="px-3 py-1 bg-green-500 rounded-md text-white font-semibold shadow-lg cursor-pointer py-3"
             >
               Administration

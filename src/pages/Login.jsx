@@ -42,8 +42,8 @@ const LoginForm = () => {
   //handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    const confirm = window.confirm("You want to preview DASHBOARD.");
-    if (confirm) {
+    // const confirm = window.confirm("You want to preview DASHBOARD.");
+    if (userName === "Admin@123" && password == 123456) {
       navigate("/dashboard");
     }
   };
