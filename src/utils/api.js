@@ -113,6 +113,26 @@ const getStudentByBatchAndDepartment = async (batch, department) => {
   }
 };
 
+const getStudentByBatchDepartmentAndRollNumber = async (
+  batch,
+  department,
+  rollNumber
+) => {
+  const uri =
+    baseUrl +
+    `/student?year=${batch}&department=${department}&rollNo=${rollNumber}`;
+  try {
+    const response = await fetch(uri, {
+      method: "GET",
+    });
+    const responseData = await response.json();
+    console.log(responseData);
+    return responseData;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export {
   importStudentDetails,
   summary,
@@ -121,4 +141,5 @@ export {
   registerStudent,
   updateStudent,
   feePayment,
+  getStudentByBatchDepartmentAndRollNumber,
 };

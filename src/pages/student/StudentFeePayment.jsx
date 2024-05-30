@@ -2,9 +2,11 @@ import { useState } from "react";
 import { FaRupeeSign } from "react-icons/fa";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
+import filterImg from "../../assets/filter.svg";
 import {
   feePayment,
   getStudentByBatchAndDepartment,
+  getStudentByBatchDepartmentAndRollNumber,
   updateStudent,
 } from "../../utils/api";
 import Loading from "../../components/Loading";
@@ -13,6 +15,7 @@ const StudentFeePayment = () => {
   const [passingBatch, setPassingBatch] = useState();
   const [department, setDepartment] = useState();
   const [studentsData, setStudentsData] = useState();
+  const [rollNumber, setRollNumber] = useState("");
   const [loading, setLoading] = useState(false);
 
   const submitHandler = async (e) => {
@@ -27,10 +30,15 @@ const StudentFeePayment = () => {
 
     try {
       setLoading(true);
-      const response = await getStudentByBatchAndDepartment(
+      const response = await getStudentByBatchDepartmentAndRollNumber(
         passingBatch,
-        department
+        department,
+        rollNumber
       );
+
+      if (response.status && response.students.length === 0) {
+        toast.warning("No Student Found");
+      }
 
       if (response.status) {
         setStudentsData(response.students[0]);
@@ -88,6 +96,19 @@ const StudentFeePayment = () => {
           </select>
         </div>
 
+        {/* roll number input */}
+        <div className="flex gap-2 items-center">
+          <label className="font-nunito font-bold text-slate-600 text-md px-1">
+            RollNumber
+          </label>
+          <input
+            type="number"
+            className="border-2 shadow-sm text-md font-bold font-nunito text-slate-600 px-2 py-1 rounded-lg cursor-pointer"
+            value={rollNumber}
+            onChange={(e) => setRollNumber(e.target.value)}
+          />
+        </div>
+
         <button
           type="submit"
           className="px-4 py-1 text-lg bg-green-400 rounded-md text-white hover:scale-110 duration-500 cursor-pointer font-nunito font-bold"
@@ -95,8 +116,28 @@ const StudentFeePayment = () => {
           Filter
         </button>
       </form>
+      {!studentsData && (
+        <div className="flex justify-center mt-32">
+          <img className="h-80 w-80" src={filterImg} alt="filter img" />
+        </div>
+      )}
       {studentsData && (
         <div>
+          <div className="flex justify-between py-3">
+            <StudentDataField
+              label={"RollNumber"}
+              value={studentsData?.rollNo}
+            />
+            <StudentDataField label={"Name"} value={studentsData?.name} />
+            <StudentDataField
+              label={"Department"}
+              value={studentsData?.department}
+            />
+            <StudentDataField
+              label={"Year"}
+              value={new Date().getUTCFullYear() - studentsData?.year + 1}
+            />
+          </div>
           <FinanceDetails
             totalPayableFee={studentsData?.totalPayableFee}
             paid={studentsData?.payment}
@@ -251,6 +292,51 @@ const FinanceDetails = ({ totalPayableFee, paid, year, studentDetails }) => {
       </div>
 
       <PaymentForm studentDetails={studentDetails} />
+    </div>
+  );
+};
+
+const StudentDataField = ({ label, value }) => {
+  function capitalizeAndSpace(str) {
+    // Capitalize the first letter of the string
+    const capitalizedFirst = str.charAt(0).toUpperCase() + str.slice(1);
+
+    // Add a space before each uppercase letter, except the first one
+    const result = capitalizedFirst.replace(/([A-Z])/g, " $1").trim();
+
+    return result;
+  }
+
+  const labelName = capitalizeAndSpace(label);
+
+  if (label === "_id" || label === "__v" || label === "name") return;
+
+  if (label === "hosteler") {
+    value = value === true ? "True" : "False";
+  }
+
+  if (label === "isActive") {
+    value = value === true ? "True" : "False";
+  }
+
+  if (label === "isDropout") {
+    value = value === true ? "True" : "False";
+  }
+
+  if (label === "isGraduated") {
+    value = value === true ? "True" : "False";
+  }
+
+  if (label === "isLateral") {
+    value = value === true ? "True" : "False";
+  }
+
+  return (
+    <div className="flex gap-8 items-center shadow-md px-4 py-3 rounded-lg">
+      <label className="text-lg font-semibold text-slate-600">
+        {labelName} :
+      </label>
+      <p className="text-md  text-slate-500">{value}</p>
     </div>
   );
 };
