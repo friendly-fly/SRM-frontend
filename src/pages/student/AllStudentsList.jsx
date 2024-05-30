@@ -5,18 +5,24 @@ import {
   getStudentByBatchAndDepartment,
 } from "../../utils/api";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { setStudent } from "../../store/studentSlice";
 
 const AllStudentsList = () => {
   const [passingBatch, setPassingBatch] = useState();
   const [department, setDepartment] = useState();
-  const [studentsData, setStudentsData] = useState([]);
+  // const [studentsData, setStudentsData] = useState([]);
+  const studentsData = useSelector((state) => state.student.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getLastYearStudent()
       .then((response) => response)
       .then((responseData) => {
         if (responseData.status) {
-          setStudentsData(responseData.students);
+          // setStudentsData(responseData.students);
+          dispatch(setStudent(responseData.students));
+          console.log(responseData.students);
         } else {
           toast.warning("Something went wrong");
         }
@@ -41,7 +47,8 @@ const AllStudentsList = () => {
       );
 
       if (response.status) {
-        setStudentsData(response.students);
+        // setStudentsData(response.students);
+        dispatch(setStudent(response.students));
       }
     } catch (error) {
       toast.warning("Something went wrong");

@@ -58,7 +58,7 @@ const feePayment = async (formData) => {
   const uri = baseUrl + `/payment/add`;
   try {
     const response = await fetch(uri, {
-      method: "PATCH",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },

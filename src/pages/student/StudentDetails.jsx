@@ -3,7 +3,7 @@ import { CiEdit } from "react-icons/ci";
 import { IoIosCloudDone } from "react-icons/io";
 import { FaRupeeSign } from "react-icons/fa";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
 
@@ -18,6 +18,7 @@ const StudentDetails = () => {
   const [navigationTab, setNavigationTab] = useState(NAVIGATION_DATA[0]);
   const location = useLocation();
   const { studentDetails } = location.state || {};
+  const studentsData = useSelector((state) => state.student.value);
 
   return (
     <div className="px-10 py-2">
@@ -436,7 +437,12 @@ const PersonalDetails = ({ studentDetails, name, avatar, details }) => {
   const changeStudentDetails = () => {};
 
   if (editStudentDetails) {
-    return <EditStudentDetails studentDetails={details} />;
+    return (
+      <EditStudentDetails
+        studentDetails={details}
+        setEditStudentDetails={setEditStudentDetails}
+      />
+    );
   }
 
   return (
@@ -522,14 +528,17 @@ const StudentDataField = ({ label, value }) => {
 
 import { registerStudent, updateStudent } from "../../utils/api";
 import { current } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
+import { setStudent } from "../../store/studentSlice";
 
-const EditStudentDetails = ({ studentDetails }) => {
+const EditStudentDetails = ({ studentDetails, setEditStudentDetails }) => {
   const [name, setName] = useState(studentDetails?.name);
   const [fathersName, setFathersName] = useState(studentDetails?.fathersName);
   const [mothersName, setMothersName] = useState(studentDetails?.mobileNumber);
   const [guardianName, setGuardianName] = useState(
     studentDetails?.guardianName
   );
+  const dispatch = useDispatch();
   const [guardianMobileNumber, setGuardianMobileNumber] = useState(
     studentDetails?.guardianMobileNumber
   );
@@ -543,7 +552,7 @@ const EditStudentDetails = ({ studentDetails }) => {
     studentDetails?.tenthPercentage
   );
   const [twelvePercentage, settwelvePercentage] = useState(
-    studentDetails?.twelvePercentage
+    studentDetails?.twelfthPercentage
   );
   const [diplomaCGPA, setDiplomaCGPA] = useState(studentDetails?.diplomaCGPA);
   const [hosteler, setHosteler] = useState(
@@ -557,6 +566,8 @@ const EditStudentDetails = ({ studentDetails }) => {
   const [fees, setFees] = useState(studentDetails?.totalPayableFee);
   const [avatar, setAvatar] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const uploadImage = async (file) => {
     const formData = new FormData();
@@ -644,6 +655,11 @@ const EditStudentDetails = ({ studentDetails }) => {
       const response = await updateStudent(formData, studentDetails?._id);
       if (response.status) {
         toast.success("Student updaed sucessfully");
+        const data = new Array(1);
+        data[0] = response.student;
+        dispatch(setStudent(data));
+        setEditStudentDetails(false);
+        navigate(-1);
         return;
       } else {
         toast.error("something went wrong.");

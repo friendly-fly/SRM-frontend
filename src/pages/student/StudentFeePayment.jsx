@@ -143,6 +143,7 @@ const StudentFeePayment = () => {
             paid={studentsData?.payment}
             year={studentsData?.year}
             studentDetails={studentsData}
+            setStudentDetails={setStudentsData}
           />
         </div>
       )}
@@ -150,23 +151,28 @@ const StudentFeePayment = () => {
   );
 };
 
-const PaymentForm = ({ studentDetails }) => {
+const PaymentForm = ({ studentDetails, setStudentDetails }) => {
   const [amount, setAmount] = useState();
   const [loading, setLoading] = useState(false);
   const handlePayment = async (e) => {
     e.preventDefault();
+    if (!amount) {
+      toast.warning("Please enter amout");
+      return;
+    }
     try {
       setLoading(true);
       const response = await feePayment({
-        payment: amount,
+        amount: parseInt(amount),
         id: studentDetails?._id,
       });
       if (response?.status) {
         console.log(response);
+        setStudentDetails(response.student);
         toast.success("Payment sucessfully");
         return;
       } else {
-        toast.warning("Something wen wrong.");
+        toast.warning("Something went wrong.");
       }
     } catch (error) {
       console.log(error);
@@ -203,7 +209,13 @@ const PaymentForm = ({ studentDetails }) => {
 
 export default StudentFeePayment;
 
-const FinanceDetails = ({ totalPayableFee, paid, year, studentDetails }) => {
+const FinanceDetails = ({
+  totalPayableFee,
+  paid,
+  year,
+  studentDetails,
+  setStudentDetails,
+}) => {
   console.log(studentDetails);
   const FeeData = ({ data, semester, feePerSemester }) => {
     console.log(data);
@@ -291,7 +303,10 @@ const FinanceDetails = ({ totalPayableFee, paid, year, studentDetails }) => {
         </div>
       </div>
 
-      <PaymentForm studentDetails={studentDetails} />
+      <PaymentForm
+        studentDetails={studentDetails}
+        setStudentDetails={setStudentDetails}
+      />
     </div>
   );
 };
