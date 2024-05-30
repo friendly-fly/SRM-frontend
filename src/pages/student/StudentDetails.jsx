@@ -566,6 +566,10 @@ const EditStudentDetails = ({ studentDetails, setEditStudentDetails }) => {
   const [fees, setFees] = useState(studentDetails?.totalPayableFee);
   const [avatar, setAvatar] = useState("");
   const [loading, setLoading] = useState(false);
+  const [rollNo, setRollNumber] = useState(studentDetails?.rollNo);
+  const [registrationNo, setRegistrationNo] = useState(
+    studentDetails?.registrationNo
+  );
 
   const navigate = useNavigate();
 
@@ -686,6 +690,18 @@ const EditStudentDetails = ({ studentDetails, setEditStudentDetails }) => {
           labelName={"Name"}
           fieldValue={name}
           onChangeHandler={setName}
+        />
+        <InputField
+          labelName={"Roll Number"}
+          fieldValue={rollNo}
+          require={false}
+          onChangeHandler={setRollNumber}
+        />
+        <InputField
+          labelName={"Registraion Number"}
+          fieldValue={registrationNo}
+          require={false}
+          onChangeHandler={setRegistrationNo}
         />
         <InputField
           labelName={"Father's Name"}

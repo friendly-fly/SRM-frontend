@@ -62,7 +62,7 @@ const StudentsList = (data) => {
             <p className="col-span-2 border py-2">Full Name</p>
             <p className="border-r-2 border py-2">Mobile Number</p>
             <p className="col-span-3 border-r-2 border py-2">Address</p>
-            <p className="border-r-2 border py-2">Due</p>
+            <p className="border-r-2 border py-2">Gender</p>
           </div>
 
           {/* academic Data */}
@@ -72,12 +72,12 @@ const StudentsList = (data) => {
               return (
                 <DetailsContainer
                   key={idx}
-                  regNum={student?.regNum ?? idx}
+                  regNum={student?.registrationNo ?? idx}
                   rollNum={student?.rollNo ?? idx}
                   fullName={student?.name ?? idx}
                   mobileNum={student?.mobileNumber ?? idx}
                   address={student?.address ?? idx}
-                  due={student?.due ?? idx}
+                  gender={student?.gender}
                   studentDetails={student}
                 />
               );
@@ -97,10 +97,15 @@ const DetailsContainer = ({
   fullName,
   mobileNum,
   address,
-  due,
+  gender,
   studentDetails,
 }) => {
   const navigate = useNavigate();
+  function capitalizeFirstLetter(str) {
+    if (!str) return str; // Check for empty string
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+  gender = capitalizeFirstLetter(gender);
   return (
     <div
       className="grid grid-cols-10 text-center cursor-pointer hover:text-green-700 hover:font-bold"
@@ -113,7 +118,7 @@ const DetailsContainer = ({
       <p className="col-span-2 border-r-2 border py-2">{fullName}</p>
       <p className="border-r-2 border py-2">{mobileNum}</p>
       <p className="col-span-3 border-r-2 border py-2">{address}</p>
-      <p className="border-r-2 border py-2">{due}</p>
+      <p className="border-r-2 border py-2">{gender}</p>
     </div>
   );
 };
